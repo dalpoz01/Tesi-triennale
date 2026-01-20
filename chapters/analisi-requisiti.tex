@@ -1,0 +1,162 @@
+\chapter{Analisi dei requisiti}
+\label{cap:analisi-requisiti}
+
+\intro{Questo capitolo presenta l'analisi dettagliata dei requisiti funzionali, qualitativi e di vincolo del progetto.}\\
+
+%\section{Casi d'uso}
+
+%Per lo studio dei casi di utilizzo del prodotto sono stati creati dei diagrammi.
+%I diagrammi dei casi d'uso (in inglese \emph{Use Case Diagram}) sono diagrammi di tipo \gls{uml} dedicati alla descrizione delle funzioni o servizi offerti da un sistema, così come sono percepiti e utilizzati dagli attori che interagiscono col sistema stesso.
+%Essendo il progetto finalizzato alla creazione di un tool per l'automazione di un processo, le interazioni da parte dell'utilizzatore devono essere ovviamente ridotte allo stretto necessario. Per questo motivo i diagrammi d'uso risultano semplici e in numero ridotto.
+
+%begin{figure}[!h] 
+%    \centering 
+%    \includegraphics[width=0.9\columnwidth]{usecase/scenario-principale} 
+%    \caption{Use Case - UC0: Scenario principale}
+%\end{figure}
+
+%\begin{usecase}{0}{Scenario principale}
+%\usecaseactors{Sviluppatore applicativi}
+%\usecasepre{Lo sviluppatore è entrato nel plug-in di simulazione all'interno dell'IDE}
+%\usecasedesc{La finestra di simulazione mette a disposizione i comandi per configurare, registrare o eseguire un test}
+%\usecasepost{Il sistema è pronto per permettere una nuova interazione}
+%\label{uc:scenario-principale}
+%\end{usecase}
+
+\section{Tracciamento dei requisiti}
+    Da un'attenta analisi dei requisiti e degli obiettivi effettuata sul progetto è stata stilata la tabella che traccia i requisiti.
+    Sono stati individuati diversi tipi di requisiti e si è quindi fatto utilizzo di un codice identificativo per distinguerli.\\
+    Ogni requisito analizzato sarà identificato univocamente da una sigla del tipo \textbf{R[Tipo][Priorità][Codice]} nella quale:
+    \begin{description}
+        \item[\textbf{R}] sta per Requisito;
+
+        \item[\textbf{[Tipo]}] può essere:
+        \subitem[\textbf{F}] se Funzionale;
+        \subitem[\textbf{NF}] se Non Funzionale;
+        \subitem[\textbf{Q}] se di Qualità;
+        \subitem[\textbf{V}] se di Vincolo.
+
+        \item[\textbf{[Priorità]}] può essere:
+        \subitem[\textbf{O}] per Obbligatorio;
+        \subitem[\textbf{D}] per Desiderabile;
+        \subitem[\textbf{P}] per Opzionale.
+        
+        \item[\textbf{[Codice]}]: identifica univocamente i requisiti per ogni tipologia. È un numero intero progressivo univoco assegnato in ordine di importanza se il requisito non ha padre, 
+        se invece si tratta di un sotto-requisito segue il formato \textbf{[Codice padre].[Numero figlio]} e trattandosi di una struttura ricorsiva non c'è limite alla profondità della gerarchia. I codici sono numerati in base alla sezione e alla classificazione (Es: RFO1 = Requisito Funzionale Obbligatorio 1, RNFO1 = Requisito Non Funzionale Obbligatorio 1, RQO1 = Requisito di Qualità Obbligatorio 1, RVO1 = Requisito di Vincolo Obbligatorio 1).
+    \end{description}
+
+    Nelle tabelle \ref{tab:requisiti-funzionali}, \ref{tab:requisiti-non-funzionali}, \ref{tab:requisiti-qualitativi} e \ref{tab:requisiti-vincolo} sono riassunti i requisiti emersi in fase di analisi, classificati in base alla loro priorità e accompagnati da una breve descrizione
+    della relativa funzionalità.
+    \subsection{Requisiti funzionali}
+        I requisiti funzionali descrivono cosa deve fare il sistema. Sono le funzionalità concrete che la soluzione deve offrire per raggiungere gli obiettivi del progetto.
+        \begin{table}[H]%
+            \caption{Tabella del tracciamento dei requisti funzionali}
+            \label{tab:requisiti-funzionali}
+            \begin{tabularx}{\textwidth}{|lXl|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Requisito} & \textbf{Descrizione} & \textbf{Classificazione}\\
+            \hline
+            RFO1    & Il sistema deve fornire un editor grafico per consentire la creazione e la progettazione visuale dei report & Obbligatorio\\
+            \hline
+            RFO2    & Il sistema deve permettere l'integrazione con servizi e applicazioni che espongono dati tramite \emph{\gls{apig}} in formato \emph{JSON} & Obbligatorio\\
+            \hline
+            RFO3    & Il sistema deve poter gestire report complessi e strutturati in modo modulare, in particolare elementi di sottoreport & Obbligatorio\\
+            \hline
+            RFO4    & Il sistema deve consentire l'esportazione dei report in molteplici formati (PDF, DOC, XLSX) & Obbligatorio\\
+            \hline
+            RFO5    & Il sistema deve consentire l'invocazione programmatica dei report da applicazioni esterne tramite \emph{\gls{apig}} & Obbligatorio\\
+            \hline
+            RFO6    & Il sistema deve garantire supporto a database \emph{SQL} e \emph{NoSQL} & Obbligatorio\\
+            \hline
+            RFO7    & Il sistema deve fornire la possibilità di personalizzazione e \emph{scripting} dei report & Obbligatorio\\
+            \hline
+            \end{tabularx}
+        \end{table}%
+
+    \subsection{Requisiti non funzionali}
+        I requisiti non funzionali definiscono come il sistema deve comportarsi, cioè le sue proprietà di qualità interna. Non aggiungono nuove funzioni, ma impongono vincoli di prestazioni, sicurezza, disponibilità, scalabilità, affidabilità e manutenibilità.
+        \begin{table}[H]%
+            \caption{Tabella del tracciamento dei requisiti non funzionali}
+            \label{tab:requisiti-non-funzionali}
+            \begin{tabularx}{\textwidth}{|lXl|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Requisito} & \textbf{Descrizione} & \textbf{Classificazione}\\
+            \hline
+            RNFO1    & Il sistema deve supportare la scalabilità, consentendo la gestione di un numero crescente di richieste e utenti & Obbligatorio\\
+            \hline
+            RNFO2    & Il sistema deve garantire la corretta generazione dei report in modo consistente & Obbligatorio\\
+            \hline
+            RNFO3    & Il sistema deve consentire una facile integrazione con applicazioni esistenti sviluppate in \emph{Java}, \emph{.NET} e \emph{Python} & Obbligatorio\\
+            \hline
+            RNFO4    & Il sistema deve garantire tempi di risposta accettabili anche su dataset consistenti & Obbligatorio\\
+            \hline
+            RNFO5    & Il sistema deve risultare mantenibile, facilitando aggiornamenti, configurazioni e interventi evolutivi & Desiderabile\\
+            \hline
+            \end{tabularx}
+        \end{table}%
+
+    \subsection{Requisiti qualitativi}
+        I requisiti qualitativi specificano le proprietà qualitative che influenzano l'esperienza d'uso e la manutenibilità. Si concentrano su aspetti percepibili, come semplicità, chiarezza, flessibilità o estendibilità.
+        \begin{table}[H]%
+            \caption{Tabella del tracciamento dei requisiti qualitativi}
+            \label{tab:requisiti-qualitativi}
+            \begin{tabularx}{\textwidth}{|lXl|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Requisito} & \textbf{Descrizione} & \textbf{Classificazione}\\
+            \hline
+            RQO1    & Il sistema deve fornire un’interfaccia utente intuitiva e di facile utilizzo & Obbligatorio\\
+            \hline
+            RQD2    & Il sistema deve garantire coerenza nella progettazione e nel \emph{layout} dei report & Desiderabile\\
+            \hline
+            RQD3    & Il sistema deve offrire una buona esperienza di sviluppo, supportata da documentazione chiara e \emph{\gls{apig}} ben definite & Desiderabile\\
+            \hline
+            \end{tabularx}
+        \end{table}%
+
+    \subsection{Requisiti di vincolo}
+        I requisiti di vincolo impongono limitazioni o condizioni esterne al progetto: ambienti, tecnologie, compatibilità, strumenti, standard aziendali o legali.
+        \begin{table}[H]%
+            \caption{Tabella del tracciamento dei requisiti di vincolo}
+            \label{tab:requisiti-vincolo}
+            \begin{tabularx}{\textwidth}{|lXl|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Requisito} & \textbf{Descrizione} & \textbf{Classificazione}\\
+            \hline
+            RVO1    & Il sistema deve poter essere installato e gestito su server locali, senza dipendere esclusivamente da soluzioni cloud & Obbligatorio\\
+            \hline
+            RVO2    & Il sistema deve prevedere condizioni di \emph{licensing} sostenibili, evitando vincoli restrittivi legati a licenze proprietarie & Obbligatorio\\
+            \hline
+            RVO3    & Il sistema deve essere compatibile con l'infrastruttura e lo \emph{stack} tecnologico aziendale esistente & Desiderabile\\
+            \hline
+            RVD4    & Il sistema dovrebbe utilizzare tecnologie consolidate e ampiamente supportate dalla \emph{community} o dal \emph{vendor} & Desiderabile\\
+            \hline
+            \end{tabularx}
+        \end{table}%
+    \subsection{Riepilogo dei requisiti}
+        \begin{table}[H]
+            \centering
+            \caption{Riepilogo dei requisiti}
+            \label{tab:riepilogo-requisiti}
+            \begin{tabular}{|l|c|c|c|c|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Tipologia} & \textbf{Obbligatorio} & \textbf{Desiderabile} & \textbf{Opzionale} & \textbf{Totale}\\
+            \hline
+            \textbf{Funzionali} & 7 & 0 & 0 & 7\\
+            \hline
+            \textbf{Non funzionali} & 4 & 1 & 0 & 5\\
+            \hline
+            \textbf{Qualitativi} & 1 & 2 & 0 & 3\\
+            \hline
+            \textbf{Vincolo} & 3 & 1 & 0 & 4\\
+            \hline
+            \textbf{Totale} & 15 & 4 & 0 & 19\\
+            \hline
+            \end{tabular}
+        \end{table}
+
+        

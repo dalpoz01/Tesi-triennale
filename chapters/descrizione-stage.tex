@@ -1,0 +1,100 @@
+\chapter{Descrizione dello stage}
+\label{cap:descrizione-stage}
+
+\intro{In questo capitolo viene presentata la descrizione dello \emph{stage}, con particolare attenzione al progetto svolto, ai rischi identificati e agli obiettivi raggiunti.}\\
+
+\section{Introduzione al progetto}
+
+Lo \emph{stage} si è svolto presso l'azienda Bluenext Srl, specializzata nello sviluppo di soluzioni software personalizzate per le imprese.
+L'obiettivo principale dello \emph{stage} è stato quello di ricercare e analizzare sistemi di reportistica centralizzata, con particolare attenzione alle alternative a JasperServer.
+Il progetto ha previsto una fase di analisi delle soluzioni esistenti, seguita dalla progettazione e implementazione di un prototipo basato su una delle alternative individuate.
+
+
+\section{Analisi preventiva dei rischi}
+
+L'analisi preventiva dei rischi ha l'obiettivo di identificare possibili criticità tecniche, organizzative e prestazionali, al fine di definire strategie di mitigazione e garantire l'affidabilità della soluzione proposta.\\ 
+In una prima fase di analisi iniziale sono stati individuati alcuni possibili rischi a cui si potrà andare incontro.
+Si è quindi proceduto a elaborare delle possibili soluzioni per far fronte a tali rischi.\\
+
+\begin{risk}{Non conoscenza di \emph{JasperServer}}
+    \vspace{0.5em}
+    \riskdescription{La mancata conoscenza iniziale di \emph{JasperServer} potrebbe ostacolare la valutazione e la ricerca delle alternative}
+    \vspace{0.5em}
+    \riskimpact{Alto}
+    \vspace{0.5em}
+    \riskprobability{Media}
+    \vspace{0.5em}
+    \risksolution{Per mitigare questo rischio, è stato pianificato uno studio approfondito della documentazione ufficiale di \emph{JasperServer} e l'analisi di casi d'uso reali per comprendere le funzionalità chiave e i requisiti che le alternative devono soddisfare}
+    \label{risk:non-conoscenza-jasper} 
+\end{risk}
+
+\begin{risk}{Integrazione tra componenti eterogenei}
+    \vspace{0.5em}
+    \riskdescription{L'integrazione tra componenti sviluppati in ambienti e linguaggi differenti (\emph{Java} per il motore di reportistica e \emph{Python} per il server \emph{REST}) potrebbe generare problemi di comunicazione, gestione degli errori o incompatibilità nei formati dei dati scambiati}
+    \vspace{0.5em}
+    \riskimpact{Alto}
+    \vspace{0.5em}
+    \riskprobability{Media}
+    \vspace{0.5em}
+    \risksolution{Definizione di interfacce \emph{REST} standardizzate, utilizzo di formati di scambio dati strutturati (\emph{JSON}) e \emph{test} incrementali delle \emph{\gls{apig}\glsfirstoccur} per verificare il corretto funzionamento delle interazioni tra i componenti}
+    \label{risk:integrazione-eterogenea} 
+\end{risk}
+
+\begin{risk}{Complessità di installazione e configurazione}
+    \vspace{0.5em}
+    \riskdescription{La complessità di installazione e configurazione delle soluzioni alternative a \emph{JasperServer} potrebbe richiedere tempi e risorse maggiori rispetto alle aspettative iniziali}
+    \vspace{0.5em}
+    \riskimpact{Medio}
+    \vspace{0.5em}
+    \riskprobability{Media}
+    \vspace{0.5em}
+    \risksolution{Redazione di una documentazione tecnica dettagliata delle procedure di installazione e configurazione e utilizzo di container \emph{Docker} per standardizzare l'ambiente di esecuzione}
+    \label{risk:complessita-installazione} 
+\end{risk}
+
+\begin{risk}{Scalabilità del sistema}
+    \vspace{0.5em}
+    \riskdescription{La scalabilità del sistema potrebbe essere limitata da fattori tecnologici o architetturali, specialmente in caso di crescita del carico di lavoro o dell'uso simultaneo da parte di molti utenti}
+    \vspace{0.5em}
+    \riskimpact{Alto}
+    \vspace{0.5em}
+    \riskprobability{Media}
+    \vspace{0.5em}
+    \risksolution{Valutazione della scalabilità attraverso \emph{test} di carico e analisi delle architetture supportate. Eventuale separazione tra componente di generazione dei report e componente di esposizione dei risultati}
+    \label{risk:scalabilita-sistema} 
+\end{risk}
+
+\begin{risk}{Dipendenza da tecnologie di terze parti}
+    \vspace{0.5em}
+    \riskdescription{L'utilizzo di \emph{framework} e librerie di terze parti (\emph{JasperReports}, \emph{BIRT Runtime}, \emph{Java}, \emph{Python}) introduce una dipendenza da tecnologie esterne, con possibili problemi di compatibilità, supporto o aggiornamenti futuri}
+    \vspace{0.5em}
+    \riskimpact{Medio}
+    \vspace{0.5em}
+    \riskprobability{Bassa}
+    \vspace{0.5em}
+    \risksolution{Selezione di versioni stabili e ben documentate, verifica della compatibilità tra le dipendenze e definizione di una strategia di aggiornamento controllata}
+    \label{risk:dipendenza-terze-parti} 
+\end{risk}
+
+\section{Requisiti e obiettivi}
+Gli obiettivi principali dello \emph{stage} sono stati definiti in base alle esigenze dell'azienda ospitante e alle competenze da sviluppare durante il periodo di tirocinio.\\
+Gli obiettivi specifici del progetto sono i seguenti:
+\begin{itemize}
+    \item Ricerca e analisi di alternative a \emph{JasperServer} per la reportistica centralizzata.
+    \item Progettazione e implementazione di un prototipo basato su una delle soluzioni individuate.
+    \item Valutazione delle prestazioni del prototipo sviluppato.
+    \item Documentazione dettagliata del progetto e preparazione della presentazione finale.
+\end{itemize}
+Ogni fase è stata pianificata con obiettivi specifici e tempistiche definite per garantire il completamento del progetto entro la durata dello \emph{stage}. \\
+Per l'analisi dei requisiti si rimanda al Capitolo \ref{cap:analisi-requisiti} per definirli in dettaglio e in modo più strutturato.
+
+\section{Pianificazione}
+Tutto lo svolgimento dello \emph{stage} è stato pianificato in modo da rispettare le tempistiche stabilite e garantire il raggiungimento degli obiettivi prefissati seguendo la metodologia \emph{Agile}.
+Le attività previste per lo svolgimento dello \emph{stage} sono state suddivise in cinque fasi principali:
+\begin{itemize}
+    \item \textbf{Fase 1 - Analisi delle soluzioni esistenti:} ricerca e valutazione delle alternative a JasperServer per la reportistica centralizzata.
+    \item \textbf{Fase 2 - Analisi approfondita delle soluzioni individuate:} studio dettagliato delle funzionalità, dei vantaggi e degli svantaggi delle soluzioni selezionate.
+    \item \textbf{Fase 3 - Studio specifiche e implementazione del prototipo:} definizione delle specifiche tecniche e sviluppo del prototipo basato sulla soluzione scelta.
+    \item \textbf{Fase 4 - Test e valutazione:} esecuzione di \emph{test} per verificare le funzionalità e le performance del prototipo, seguita da una valutazione complessiva.
+    \item \textbf{Fase 5 - Documentazione e presentazione:} redazione della documentazione e preparazione della presentazione finale del progetto.
+\end{itemize}
