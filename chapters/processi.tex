@@ -1,15 +1,127 @@
-\chapter{Processi e metodologie}
+\chapter{Metodologie di analisi e tecnologie analizzate}
 \label{cap:processi-metodologie}
 
-\intro{Brevissima introduzione al capitolo}\\
+\intro{Questo capitolo descrive le diverse fasi di analisi utilizzate per analizzare un prodotto a partire da JasperServere le tecnologie utilizzate per lo sviluppo del PoC.}
 
-\section{Processo sviluppo prodotto}
+\section{Studio del prodotto JasperServer}
+    La prima fase del progetto ha previsto uno studio approfondito del prodotto JasperServer, al fine di comprenderne le funzionalità, le caratteristiche tecniche e le modalità di utilizzo per poter .
+    Per analizzare il prodotto JasperServer sono state utilizzate diverse metodologie di analisi, tra cui:
+    \begin{itemize}
+        \item \textbf{Analisi documentale}: è stata effettuata una revisione approfondita della documentazione ufficiale di JasperServer, inclusi manuali utente, guide di installazione e documenti tecnici. Questo ha permesso di comprendere le funzionalità principali del prodotto, le sue caratteristiche tecniche e le modalità di utilizzo.
+        
+        \item \textbf{Test pratici}: sono stati eseguiti test pratici utilizzando JasperServer in scenari reali o simulati. Questo ha permesso di valutare le prestazioni del prodotto, la facilità di configurazione e l'efficacia delle funzionalità offerte.
+    \end{itemize}
+\section{Tecnologie analizzate}
+    Durante il progetto sono state analizzate diverse tecnologie con lo scopo di individuare quale di queste fosse la più adatta a sostituire JasperServer.
+    Per eseguire questa ricerca sono stati consultati articoli, documentazioni ufficiali e tutorial online.
+    \subsection{Birt}
+        Birt (Business Intelligence and Reporting Tools) è una piattaforma open source per la creazione di report e visualizzazioni di dati. È sviluppata dalla Eclipse Foundation ed è ampiamente utilizzata per lo sviluppo di applicazioni di business intelligence.
+        Birt offre una vasta gamma di funzionalità, tra cui la creazione di report interattivi, la generazione di grafici e tabelle, l'integrazione con diverse fonti di dati e la possibilità di personalizzare l'aspetto dei report.
+        La piattaforma Birt è basata su Java e può essere integrata in applicazioni web o desktop. Offre un ambiente di sviluppo intuitivo che consente agli sviluppatori di creare report complessi senza dover scrivere codice complesso.
+        Birt supporta anche l'esportazione dei report in diversi formati, come PDF, Excel, HTML e Word, consentendo agli utenti di condividere facilmente i report generati.
+        In sintesi, Birt è una piattaforma potente e flessibile per la creazione di report e visualizzazioni di dati, che offre una vasta gamma di funzionalità per soddisfare le esigenze delle applicazioni di business intelligence.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.6\columnwidth]{tecnologie/BIRT-Logo.png} 
+            \caption{Logo di BIRT}
+        \end{figure}
+    \subsection{Dynamic PDF}
+        Dynamic PDF è una libreria software che consente la generazione dinamica di documenti PDF in modo programmatico. È sviluppata da Ceetron Solutions ed è ampiamente utilizzata per creare report, fatture, etichette e altri documenti PDF personalizzati.
+        La libreria Dynamic PDF offre una vasta gamma di funzionalità, tra cui la creazione di pagine, l'aggiunta di testo, immagini, tabelle e grafici, nonché la formattazione avanzata dei contenuti. Supporta anche l'inserimento di collegamenti ipertestuali, segnalibri e moduli interattivi nei documenti PDF.
+        Dynamic PDF è progettata per essere facile da usare e integrare in applicazioni software esistenti. Offre un'API intuitiva che consente agli sviluppatori di creare documenti PDF in modo rapido ed efficiente, senza dover affrontare la complessità del formato PDF sottostante.
+        In sintesi, Dynamic PDF è una libreria potente e flessibile per la generazione dinamica di documenti PDF, che offre una vasta gamma di funzionalità per soddisfare le esigenze delle applicazioni che richiedono la creazione di documenti PDF personalizzati.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.3\columnwidth]{tecnologie/DynamicPDF_Logo.png} 
+            \caption{Logo di Dynamic PDF}
+        \end{figure}
+    \subsection{FineReport}
+        FineReport è una piattaforma di business intelligence e reportistica sviluppata da FanRuan Software Co., Ltd. È ampiamente utilizzata per la creazione di report, dashboard e analisi dei dati in ambito aziendale.
+        FineReport offre una vasta gamma di funzionalità, tra cui la creazione di report interattivi, la generazione di grafici e tabelle, l'integrazione con diverse fonti di dati e la possibilità di personalizzare l'aspetto dei report. La piattaforma supporta anche l'esportazione dei report in diversi formati, come PDF, Excel, HTML e Word.
+        FineReport è progettata per essere facile da usare e integrare in applicazioni software esistenti. Offre un ambiente di sviluppo intuitivo che consente agli sviluppatori di creare report complessi senza dover scrivere codice complesso.
+        In sintesi, FineReport è una piattaforma potente e flessibile per la creazione di report e analisi dei dati, che offre una vasta gamma di funzionalità per soddisfare le esigenze delle applicazioni di business intelligence.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.5\columnwidth]{tecnologie/FineReport-logo.png} 
+            \caption{Logo di FineReport}
+        \end{figure}    
+    \subsection{Helical Insight}
+        Helical Insight è una piattaforma di business intelligence open source che offre una vasta gamma di strumenti per l'analisi dei dati, la creazione di report e la visualizzazione delle informazioni aziendali. È progettata per essere flessibile e scalabile, consentendo alle organizzazioni di adattare la piattaforma alle proprie esigenze specifiche.
+        Helical Insight offre funzionalità avanzate come l'integrazione con diverse fonti di dati, la creazione di dashboard interattivi, l'analisi predittiva e l'elaborazione in-memory. La piattaforma supporta anche l'esportazione dei report in diversi formati, come PDF, Excel, HTML e Word.
+        Helical Insight è sviluppata in Java e può essere integrata in applicazioni web o desktop. Offre un ambiente di sviluppo intuitivo che consente agli sviluppatori di creare report complessi senza dover scrivere codice complesso.
+        In sintesi, Helical Insight è una piattaforma completa di business intelligence che consente alle organizzazioni di sfruttare al massimo i propri dati per prendere decisioni informate e migliorare le prestazioni aziendali.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.4\columnwidth]{tecnologie/Helical-insight-logo.png} 
+            \caption{Logo di Helical Insight}
+        \end{figure}
+    \subsection{JsReport}
+        JsReport è una piattaforma di reportistica open source che consente la creazione, la gestione e la distribuzione di report in modo semplice ed efficiente. È progettata per essere flessibile e scalabile, consentendo agli sviluppatori di creare report personalizzati utilizzando tecnologie web standard come HTML, CSS e JavaScript.
+        JsReport offre una vasta gamma di funzionalità, tra cui la generazione di report in diversi formati (PDF, Excel, HTML), l'integrazione con diverse fonti di dati, la creazione di dashboard interattivi e la possibilità di programmare l'esecuzione dei report. La piattaforma supporta anche l'uso di modelli personalizzati e l'estensione delle funzionalità tramite plugin.
+        JsReport è sviluppata in Node.js e può essere integrata in applicazioni web o desktop. Offre un'API intuitiva che consente agli sviluppatori di creare report complessi senza dover scrivere codice complesso.
+        In sintesi, JsReport è una piattaforma potente e flessibile per la creazione di report, che offre una vasta gamma di funzionalità per soddisfare le esigenze delle applicazioni di reportistica.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.3\columnwidth]{tecnologie/JsReport_logo.png} 
+            \caption{Logo di JsReport}
+        \end{figure}
+    \subsection{Knowage}
+        Knowage è una piattaforma di business intelligence open source che offre una vasta gamma di strumenti per l'analisi dei dati, la creazione di report e la visualizzazione delle informazioni aziendali. È sviluppata da Engineering Ingegneria Informatica S.p.A. ed è ampiamente utilizzata da organizzazioni di diverse dimensioni per prendere decisioni basate sui dati.
+        Knowage offre una suite completa di strumenti, tra cui Knowage Reporting per la creazione di report, Knowage OLAP per l'analisi multidimensionale dei dati e Knowage Dashboard per la creazione di dashboard interattivi. La piattaforma supporta l'integrazione con diverse fonti di dati, inclusi database relazionali, file di testo, servizi web e big data.
+        Knowage offre anche funzionalità avanzate come l'analisi predittiva, l'elaborazione in-memory e l'integrazione con strumenti di visualizzazione dei dati come Tableau e QlikView.
+        In sintesi, Knowage è una piattaforma completa di business intelligence che consente alle organizzazioni di sfruttare al massimo i propri dati per prendere decisioni informate e migliorare le prestazioni aziendali.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.6\columnwidth]{tecnologie/KNOWAGE-logo.png} 
+            \caption{Logo di Knowage}
+        \end{figure}
+    \subsection{Pentaho}
+    Pentaho è una piattaforma di business intelligence open source che offre una vasta gamma di strumenti
+    per l'analisi dei dati, la creazione di report e la visualizzazione delle informazioni aziendali. È sviluppata da Hitachi Vantara ed è ampiamente utilizzata da organizzazioni di diverse dimensioni per prendere decisioni basate sui dati.
+    Pentaho offre una suite completa di strumenti, tra cui Pentaho Data Integration (PDI) per l'estrazione, la trasformazione e il caricamento dei dati (ETL), Pentaho Business Analytics per l'analisi dei dati e la creazione di report, e Pentaho Dashboard Designer per la creazione di dashboard interattivi.
+    La piattaforma supporta l'integrazione con diverse fonti di dati, inclusi database relazionali, file di testo, servizi web e big data. Offre anche funzionalità avanzate come l'analisi predittiva, l'elaborazione in-memory e l'integrazione con strumenti di visualizzazione dei dati come Tableau e QlikView.
+    In sintesi, Pentaho è una piattaforma completa di business intelligence che consente alle organizzazioni di sfruttare al massimo i propri dati per prendere decisioni informate e migliorare le prestazioni aziendali.
+    \begin{figure}[!h] 
+        \centering 
+        \includegraphics[width=0.3\columnwidth]{tecnologie/Pentaho-logo.png} 
+        \caption{Logo di Pentaho}
+    \end{figure}
+    \subsection{ReportServer}
+        ReportServer è una piattaforma di reportistica open source che consente la creazione, la gestione e la distribuzione di report in modo semplice ed efficiente. È progettata per essere flessibile e scalabile, consentendo agli sviluppatori di creare report personalizzati utilizzando tecnologie web standard come HTML, CSS e JavaScript.
+        ReportServer offre una vasta gamma di funzionalità, tra cui la generazione di report in diversi formati (PDF, Excel, HTML), l'integrazione con diverse fonti di dati, la creazione di dashboard interattivi e la possibilità di programmare l'esecuzione dei report. La piattaforma supporta anche l'uso di modelli personalizzati e l'estensione delle funzionalità tramite plugin.
+        ReportServer è sviluppata in Java e può essere integrata in applicazioni web o desktop. Offre un'API intuitiva che consente agli sviluppatori di creare report complessi senza dover scrivere codice complesso.
+        In sintesi, ReportServer è una piattaforma potente e flessibile per la creazione di report, che offre una vasta gamma di funzionalità per soddisfare le esigenze delle applicazioni di reportistica.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.3\columnwidth]{tecnologie/ReportServerLogo.png} 
+            \caption{Logo di ReportServer}
+        \end{figure}
+    \subsection{SAP Crystal Report}
+        SAP Crystal Reports è uno strumento di reportistica sviluppato da SAP che consente agli utenti di creare report interattivi e visivamente accattivanti basati su dati provenienti da diverse fonti. È ampiamente utilizzato in ambito aziendale per generare report dettagliati e analisi dei dati.
+        SAP Crystal Reports offre una vasta gamma di funzionalità, tra cui la creazione di report personalizzati, l'integrazione con diverse fonti di dati (database relazionali, file di testo, servizi web), la generazione di grafici e tabelle, e la possibilità di esportare i report in diversi formati (PDF, Excel, Word).
+        Lo strumento supporta anche funzionalità avanzate come la formattazione condizionale, i sottoreport, le formule personalizzate e l'integrazione con applicazioni .NET e Java.
+        In sintesi, SAP Crystal Reports è uno strumento potente e flessibile per la creazione di report aziendali, che offre una vasta gamma di funzionalità per soddisfare le esigenze delle organizzazioni che necessitano di analisi dei dati e reportistica avanzata.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.3\columnwidth]{tecnologie/SAPCrystalReport_logo.png} 
+            \caption{Logo di SAP Crystal Reports}
+        \end{figure}
+    \subsection{Stimulsoft}
+        Stimulsoft è una suite di strumenti di reportistica e business intelligence che consente agli utenti di creare report interattivi e dashboard personalizzati. È progettata per essere facile da usare e altamente flessibile, supportando diverse fonti di dati e offrendo un'ampia gamma di funzionalità per la generazione e la visualizzazione dei dati.
+        Stimulsoft offre un ambiente visivo intuitivo per la creazione di report, con supporto per diversi formati di output come PDF, Excel, Word e HTML. Inoltre, consente l'integrazione con applicazioni web e desktop, fornendo API e librerie che facilitano l'automazione della generazione dei report.
+        In sintesi, Stimulsoft è uno strumento potente e versatile per la creazione di report aziendali, che offre una vasta gamma di funzionalità per soddisfare le esigenze delle organizzazioni che necessitano di analisi dei dati e reportistica avanzata.
+        \begin{figure}[!h] 
+            \centering 
+            \includegraphics[width=0.5\columnwidth]{tecnologie/Stimulsoft_logo.png} 
+            \caption{Logo di Stimulsoft}
+        \end{figure}
 
-\noindent Esempio di utilizzo di un termine nel glossario \\
-\gls{api}. \\
 
-\noindent Esempio di citazione in linea \\
-\cite{site:agile-manifesto}. \\
+%\noindent Esempio di utilizzo di un termine nel glossario \\
+%\gls{api}. \\
 
-\noindent Esempio di citazione nel pie' di pagina \\
-citazione\footcite{womak:lean-thinking} \\
+%\noindent Esempio di citazione in linea \\
+%\cite{site:agile-manifesto}. \\
+
+%\noindent Esempio di citazione nel pie' di pagina \\
+%citazione\footcite{womak:lean-thinking} \\
