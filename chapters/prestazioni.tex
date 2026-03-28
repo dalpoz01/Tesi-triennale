@@ -1,6 +1,182 @@
-\chapter{Prestazioni}
-\label{cap:prestazioni}
+\chapter{Valutazione della soluzione}
 
-\intro{Questo capitolo descrive le prestazioni ottenute durante i test effettuati sul prototipo di reportistica sviluppato rispetto a JasperServer.}
+\label{cap:valutazione}
 
-\section{Configurazione dei test}
+%\intro{Questo capitolo descrive le prestazioni ottenute durante i test effettuati sul prototipo di reportistica sviluppato rispetto a JasperServer.}
+
+\intro{Il presente capitolo ha l'obiettivo di analizzare e confrontare le prestazioni del sistema sviluppato nel Proof of Concept (PoC) rispetto alla soluzione di riferimento, rappresentata da JasperServer. L'analisi prestazionale riveste un ruolo fondamentale nel processo di valutazione, in quanto consente di verificare non solo la correttezza funzionale delle soluzioni, ma anche la loro efficienza e scalabilità in scenari di utilizzo realistici. A differenza dei test funzionali, che si limitano a verificare la presenza delle caratteristiche richieste, i test prestazionali permettono di valutare il comportamento del sistema in termini di tempi di risposta, gestione delle risorse e capacità di adattarsi a volumi crescenti di dati.}
+
+\section{Obiettivi dei test prestazionali}
+
+I test condotti hanno lo scopo di fornire una valutazione preliminare delle prestazioni delle soluzioni analizzate, con particolare riferimento ai seguenti aspetti:
+
+\begin{itemize}
+    \item tempo di generazione dei report;
+    \item comportamento del sistema al variare della dimensione dei dati in ingresso;
+    \item differenze tra esecuzione locale e su server;
+    \item impatto dell'inizializzazione del motore di reporting;
+    \item stabilità delle prestazioni su esecuzioni ripetute.
+\end{itemize}
+
+È importante sottolineare che tali test non hanno l'obiettivo di simulare un ambiente di produzione reale, ma piuttosto di fornire indicazioni comparative utili a supportare la valutazione delle soluzioni.
+
+\section{Metodologia di test}
+
+Per garantire la comparabilità dei risultati, è stato definito un approccio metodologico uniforme per entrambe le soluzioni analizzate.
+
+In primo luogo, si è cercato di mantenere condizioni di esecuzione il più possibile simili, pur tenendo conto delle differenze architetturali tra i sistemi. In particolare:
+
+\begin{itemize}
+    \item il PoC è stato eseguito come applicazione locale;
+    \item JasperServer è stato eseguito all'interno di un container Docker;
+    \item entrambi i sistemi hanno utilizzato gli stessi file di report e le stesse sorgenti dati in formato JSON.
+\end{itemize}
+
+La scelta di utilizzare dati JSON come input è coerente con i requisiti definiti nella fase di analisi, in quanto rappresentano una modalità comune di scambio dati tra servizi applicativi.
+
+\section{Strumenti utilizzati}
+
+Per la raccolta delle metriche prestazionali sono stati utilizzati strumenti differenti, in base alla natura delle soluzioni analizzate:
+
+\begin{itemize}
+    \item per JasperServer è stato utilizzato il pannello \textit{Network} degli strumenti di sviluppo del browser Google Chrome, che consente di misurare i tempi di risposta delle richieste HTTP;
+    
+    \item per il PoC è stato utilizzato VisualVM, uno strumento open-source per il monitoraggio delle applicazioni Java, utile per osservare tempi di esecuzione e comportamento del sistema.
+\end{itemize}
+
+Questa scelta è stata dettata dalla diversa modalità di esecuzione delle due soluzioni, una basata su server e l'altra su applicazione locale.
+
+\section{Scenari di test}
+
+Sono stati definiti diversi scenari di test, variando la complessità del report e la dimensione dei dati in ingresso. In particolare, sono stati considerati:
+
+\begin{itemize}
+    \item report semplice con dataset ridotto (circa 10 elementi);
+    \item report di complessità intermedia con dataset medio (circa 100 elementi);
+    \item report complesso con dataset esteso (circa 1000 elementi);
+    \item esecuzione senza dati (report vuoto).
+\end{itemize}
+
+Questa varietà di scenari consente di osservare il comportamento del sistema al crescere della quantità di dati e della complessità computazionale.
+
+\section{Risultati dei test}
+
+\subsection{Primo scenario: dataset ridotto}
+
+Nel primo scenario è stato utilizzato un report semplice alimentato da un dataset JSON contenente circa 10 elementi.
+
+I risultati hanno evidenziato che:
+
+\begin{itemize}
+    \item la prima esecuzione di JasperServer presenta un tempo significativamente più elevato (circa 18 secondi), dovuto principalmente all'inizializzazione del sistema e al caricamento delle risorse;
+    \item le esecuzioni successive risultano molto più rapide, con tempi nell'ordine del secondo;
+    \item il PoC mostra un comportamento simile nelle esecuzioni successive, ma con un tempo iniziale leggermente inferiore.
+\end{itemize}
+
+Questo comportamento è coerente con la presenza di meccanismi di caching e inizializzazione nei sistemi server-based.
+
+Di seguito è riportata una grafica per Jasper server e di seguito una grafica del PoC che confronta i tempi di generazione dei report per entrambe le soluzioni nel primo scenario:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi.png}
+    \caption{Confronto dei tempi di generazione dei report nel primo scenario}
+    \label{fig:scenario1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{prestazioni/PoC_tempi.png}
+    \caption{Confronto dei tempi di generazione dei report nel primo scenario}
+    \label{fig:scenario1_PoC}
+\end{figure}
+
+
+\subsection{Secondo scenario: dataset medio}
+
+Nel secondo scenario, caratterizzato da un dataset di circa 100 elementi, si osserva un aumento dei tempi di generazione per entrambe le soluzioni.
+
+Il PoC mantiene tempi di risposta comparabili con JasperServer nelle esecuzioni successive, mentre la prima esecuzione continua a rappresentare il caso più oneroso in termini computazionali.
+
+Di seguito è riportata una grafica per Jasper server e di seguito una grafica del PoC che confronta i tempi di generazione dei report per entrambe le soluzioni nel secondo scenario:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi_100.png}
+    \caption{Confronto dei tempi di generazione dei report nel secondo scenario}
+    \label{fig:scenario2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{prestazioni/PoC_tempi_100.png}
+    \caption{Confronto dei tempi di generazione dei report nel secondo scenario}
+    \label{fig:scenario2_PoC}
+\end{figure}
+\subsection{Terzo scenario: dataset esteso}
+
+Nel terzo scenario, con dataset di circa 1000 elementi, emerge in modo più evidente l'impatto della dimensione dei dati sulle prestazioni.
+
+Entrambe le soluzioni mostrano un incremento significativo dei tempi di elaborazione, evidenziando come la fase di parsing e gestione dei dati JSON rappresenti uno dei principali colli di bottiglia.
+
+Nonostante ciò, il comportamento del PoC rimane stabile e in linea con quello della soluzione di riferimento.
+Di seguito è riportata una grafica per Jasper server e di seguito una grafica del PoC che confronta i tempi di generazione dei report per entrambe le soluzioni nel terzo scenario:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi_1000.png}
+    \caption{Confronto dei tempi di generazione dei report nel terzo scenario}
+    \label{fig:scenario3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{prestazioni/PoC_tempi_1000.png}
+    \caption{Confronto dei tempi di generazione dei report nel terzo scenario}
+    \label{fig:scenario3_PoC}
+\end{figure}
+\subsection{Quarto scenario: report senza dati}
+
+Nel caso di report senza dati, i tempi di generazione risultano estremamente ridotti, evidenziando come il costo computazionale sia fortemente influenzato dalla quantità di dati da elaborare piuttosto che dalla struttura del report stesso.
+Di seguito è riportata una grafica per Jasper server e di seguito una grafica del PoC che confronta i tempi di generazione dei report per entrambe le soluzioni nel quarto scenario:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi_vuoto.png}
+    \caption{Confronto dei tempi di generazione dei report nel quarto scenario}
+    \label{fig:scenario4}
+\end{figure}
+
+\begin{figure}[H]   
+    \centering
+    \includegraphics[width=0.8\textwidth]{prestazioni/PoC_tempi_vuoto.png}
+    \caption{Confronto dei tempi di generazione dei report nel quarto scenario}
+    \label{fig:scenario4_PoC}
+\end{figure}
+
+\section{Analisi dei risultati}
+
+Dall'analisi complessiva dei risultati emergono alcune considerazioni rilevanti.
+
+In primo luogo, il tempo di inizializzazione rappresenta un fattore critico, in particolare per JasperServer, che richiede un overhead maggiore a causa della sua architettura basata su container e servizi.
+
+In secondo luogo, le prestazioni delle due soluzioni risultano comparabili nelle esecuzioni successive alla prima, suggerendo che il PoC sviluppato è in grado di competere, almeno in termini di tempi di generazione, con una soluzione consolidata come JasperServer.
+
+Un ulteriore elemento da considerare è l'impatto della dimensione dei dati: all'aumentare del dataset, i tempi di elaborazione crescono in modo significativo, evidenziando la necessità di ottimizzazioni, soprattutto nella fase di parsing dei dati JSON.
+
+\section{Limiti dei test}
+
+È opportuno evidenziare alcuni limiti della sperimentazione condotta:
+
+\begin{itemize}
+    \item ambiente di test non equivalente a un contesto di produzione;
+    \item differenze architetturali tra le soluzioni (locale vs container);
+    \item numero limitato di scenari testati;
+    \item assenza di test sotto carico concorrente.
+\end{itemize}
+
+Questi fattori possono influenzare i risultati e devono essere considerati nell'interpretazione dei dati.
+
+\section{Conclusioni}
+
+I risultati ottenuti dimostrano che il Proof of Concept è in grado di garantire prestazioni comparabili a JasperServer in scenari di utilizzo standard, soprattutto nelle esecuzioni successive alla prima.
+
+Nonostante alcune differenze dovute all'architettura e all'ambiente di esecuzione, il sistema sviluppato si dimostra adeguato per l'obiettivo prefissato, ovvero la realizzazione di una soluzione alternativa per la generazione di report.
+
+I risultati ottenuti forniscono quindi una base solida per eventuali sviluppi futuri, nei quali sarà possibile approfondire aspetti legati alla scalabilità, all'ottimizzazione delle prestazioni e all'integrazione in contesti applicativi più complessi.

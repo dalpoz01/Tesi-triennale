@@ -42,6 +42,8 @@
 
 \usepackage{graphicx}                   % immagini
 
+\usepackage{xcolor}                      % float
+
 \usepackage{hyperref}                   % collegamenti ipertestuali
 
 \usepackage{listings}                   % codici
@@ -68,3 +70,35 @@
 
 \usepackage{layaureo}                   % margini ottimizzati per l'A4
 \usepackage{fancyhdr}
+
+\lstdefinestyle{tree}{
+    basicstyle=\ttfamily\small,
+    frame=single,
+    columns=fullflexible,
+    breaklines=true,
+    showstringspaces=false
+}
+
+% Colori sobri per codice
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codekeyword}{RGB}{52,73,94}      % blu/grigio scuro
+\definecolor{codestring}{RGB}{120,85,60}      % marrone tenue
+\definecolor{codecomment}{RGB}{150,150,150}     % verde oliva
+\definecolor{codenumber}{RGB}{140,140,140}    % grigio numeri
+\definecolor{codeframe}{RGB}{200,200,200}
+
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codekeyword}\bfseries,
+    stringstyle=\color{codestring},
+    commentstyle=\color{codecomment}\itshape,
+    numberstyle=\tiny\color{codenumber},
+    numbers=left,
+    numbersep=8pt,
+    frame=single,
+    rulecolor=\color{codeframe},
+    breaklines=true,
+    tabsize=2,
+    showstringspaces=false
+}
