@@ -1,10 +1,163 @@
 \chapter{Conclusioni}
 \label{cap:conclusioni}
 
-\section{Consuntivo finale}
+Il presente elaborato ha avuto come obiettivo principale l'analisi e la valutazione di soluzioni per la generazione di report, con particolare attenzione alla possibilità di realizzare un sistema personalizzato basato sull'utilizzo del motore BIRT. A partire da un'analisi preliminare delle principali piattaforme di reporting, è stato progettato e sviluppato un Proof of Concept (PoC) volto a dimostrare la fattibilità di un approccio alternativo rispetto a soluzioni consolidate come JasperServer.\\
+Il lavoro svolto ha previsto diverse fasi: una prima fase di studio delle tecnologie esistenti, una fase di progettazione dell'architettura software e infine una fase di implementazione e testing. In particolare, è stata sviluppata la componente centrale \texttt{BirtDesignToDocument}, responsabile della generazione dei documenti a partire da file di design BIRT e dati in formato JSON, integrata all'interno di un'architettura di tipo Model-View-Controller.
+
+\section{Risultati ottenuti}
+
+I risultati ottenuti dimostrano che il Proof of Concept sviluppato è in grado di soddisfare i requisiti funzionali definiti nella fase di analisi. In particolare, il sistema consente di generare report in diversi formati (PDF, DOC, XLSX, HTML) a partire da dati strutturati, garantendo flessibilità e indipendenza da piattaforme server esterne.\\
+Dal punto di vista prestazionale, i test condotti hanno evidenziato come il comportamento del sistema sia complessivamente comparabile a quello di JasperServer, soprattutto nelle esecuzioni successive alla prima. In entrambi i casi, infatti, il tempo di inizializzazione rappresenta un fattore significativo, mentre le esecuzioni successive risultano più efficienti grazie alla riduzione dell'overhead iniziale.\\
+Un ulteriore risultato rilevante riguarda la modularità del sistema sviluppato: la separazione tra logica di generazione, configurazione e interfaccia consente una maggiore flessibilità e facilita eventuali estensioni future. Questo aspetto rappresenta un valore aggiunto rispetto a soluzioni più monolitiche.
+
+\section{Limiti del lavoro}
+
+Nonostante i risultati positivi, il lavoro presenta alcuni limiti che è importante evidenziare.
+In primo luogo, i test prestazionali sono stati condotti in un ambiente controllato e non rappresentano pienamente scenari di produzione reale. In particolare, non sono stati eseguiti test sotto carico concorrente, che potrebbero evidenziare criticità legate alla gestione delle risorse e alla scalabilità del sistema.\\
+In secondo luogo, il numero di scenari testati è limitato e non copre tutte le possibili casistiche applicative. Ad esempio, non sono stati considerati dataset di dimensioni molto elevate o configurazioni distribuite.\\
+Un ulteriore limite riguarda la gestione delle risorse del motore BIRT: l'inizializzazione e la chiusura del motore ad ogni esecuzione, seppur corretta dal punto di vista della stabilità, potrebbe risultare inefficiente in contesti ad alta frequenza di utilizzo.\\
+Infine, l'interfaccia utente sviluppata nel PoC ha uno scopo puramente dimostrativo e non è stata progettata per un utilizzo in ambienti produttivi.
+
+\section{Sviluppi futuri}
+
+Alla luce dei risultati ottenuti, è possibile individuare diverse direzioni per sviluppi futuri del sistema.\\
+Un primo possibile miglioramento consiste nell'ottimizzazione delle prestazioni, ad esempio attraverso l'introduzione di meccanismi di caching o la gestione persistente del motore BIRT, evitando la sua inizializzazione ad ogni esecuzione.\\
+Un secondo sviluppo riguarda l'evoluzione dell'architettura verso un modello a servizi, ad esempio tramite la realizzazione di un'API REST che consenta di integrare il sistema in applicazioni web o microservizi.\\
+
+Ulteriori miglioramenti potrebbero includere:
+\begin{itemize}
+    \item supporto a nuove sorgenti dati (database relazionali, servizi esterni);
+    \item gestione della concorrenza e ottimizzazione per scenari multi-utente;
+    \item miglioramento dell'interfaccia utente;
+    \item integrazione con sistemi aziendali esistenti.
+\end{itemize}
+
+Questi sviluppi consentirebbero di trasformare il Proof of Concept in una soluzione completa e utilizzabile in contesti reali.
 
 \section{Raggiungimento degli obiettivi}
+Di seguito si riporta la verifica dei requisiti individuati durante l'analisi descritta nel Capitolo \ref{cap:analisi-requisiti}, suddivisi in funzionali, non funzionali, qualitativi e di vincolo. Per ciascun requisito è indicato l'esito finale ottenuto al termine del progetto: soddisfatto, parzialmente soddisfatto oppure non soddisfatto.
 
-\section{Conoscenze acquisite}
+\subsection{Requisiti funzionali}
+\begin{table}[H]%
+            \caption{Tabella del tracciamento dei requisti funzionali}
+            \label{tab:requisiti-funzionali-conclusioni}
+            \begin{tabularx}{\textwidth}{|lXll|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Requisito} & \textbf{Descrizione} & \textbf{Classificazione} & \textbf{Esito}\\
+            \hline
+            RFO1    & Il sistema deve fornire un editor grafico per consentire la creazione e la progettazione visuale dei report & Obbligatorio & Soddisfatto\\
+            \hline
+            RFO2    & Il sistema deve permettere l'integrazione con servizi e applicazioni che espongono dati tramite \emph{\gls{apig}} in formato \emph{JSON} & Obbligatorio & Soddisfatto\\
+            \hline
+            RFO3    & Il sistema deve poter gestire report complessi e strutturati in modo modulare, in particolare elementi di sottoreport & Obbligatorio & Soddisfatto\\
+            \hline
+            RFO4    & Il sistema deve consentire l'esportazione dei report in molteplici formati (PDF, DOC, XLSX) & Obbligatorio & Soddisfatto\\
+            \hline
+            RFO5    & Il sistema deve consentire l'invocazione programmatica dei report da applicazioni esterne tramite \emph{\gls{apig}} & Obbligatorio & Soddisfatto\\
+            \hline
+            RFO6    & Il sistema deve garantire supporto a database \emph{SQL} e \emph{NoSQL} & Obbligatorio & Soddisfatto\\
+            \hline
+            RFO7    & Il sistema deve fornire la possibilità di personalizzazione e \emph{scripting} dei report & Obbligatorio & Soddisfatto\\
+            \hline
+            \end{tabularx}
+        \end{table}%
+
+\subsection{Requisiti non funzionali}
+\begin{table}[H]%
+            \caption{Tabella del tracciamento dei requisiti non funzionali}
+            \label{tab:requisiti-non-funzionali-conclusioni}
+            \begin{tabularx}{\textwidth}{|lXll|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Requisito} & \textbf{Descrizione} & \textbf{Classificazione} & \textbf{Esito}\\
+            \hline
+            RNFO1    & Il sistema deve supportare la scalabilità, consentendo la gestione di un numero crescente di richieste e utenti & Obbligatorio & Soddisfatto\\
+            \hline
+            RNFO2    & Il sistema deve garantire la corretta generazione dei report in modo consistente & Obbligatorio & Soddisfatto\\
+            \hline
+            RNFO3    & Il sistema deve consentire una facile integrazione con applicazioni esistenti sviluppate in \emph{Java}, \emph{.NET} e \emph{Python} & Obbligatorio & Soddisfatto\\
+            \hline
+            RNFO4    & Il sistema deve garantire tempi di risposta accettabili anche su dataset consistenti & Obbligatorio & Soddisfatto\\
+            \hline
+            RNFO5    & Il sistema deve risultare mantenibile, facilitando aggiornamenti, configurazioni e interventi evolutivi & Desiderabile & Soddisfatto\\
+            \hline
+            \end{tabularx}
+        \end{table}%
+        
+\subsection{Requisiti qualitativi}
+\begin{table}[H]%
+            \caption{Tabella del tracciamento dei requisiti qualitativi}
+            \label{tab:requisiti-qualitativi-conclusioni}
+            \begin{tabularx}{\textwidth}{|lXll|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Requisito} & \textbf{Descrizione} & \textbf{Classificazione} & \textbf{Esito}\\
+            \hline
+            RQO1    & Il sistema deve fornire un'interfaccia utente intuitiva e di facile utilizzo & Obbligatorio & Soddisfatto\\
+            \hline
+            RQD2    & Il sistema deve garantire coerenza nella progettazione e nel \emph{layout} dei report & Desiderabile & Soddisfatto\\
+            \hline
+            RQD3    & Il sistema deve offrire una buona esperienza di sviluppo, supportata da documentazione chiara e \emph{\gls{apig}} ben definite & Desiderabile & Soddisfatto\\
+            \hline
+            \end{tabularx}
+        \end{table}%
+
+\subsection{Requisiti di vincolo}
+\begin{table}[H]%
+            \caption{Tabella del tracciamento dei requisiti di vincolo}
+            \label{tab:requisiti-vincolo-conclusioni}
+            \begin{tabularx}{\textwidth}{|lXll|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Requisito} & \textbf{Descrizione} & \textbf{Classificazione} & \textbf{Esito}\\
+            \hline
+            RVO1    & Il sistema deve poter essere installato e gestito su server locali, senza dipendere esclusivamente da soluzioni cloud & Obbligatorio & Soddisfatto\\
+            \hline
+            RVO2    & Il sistema deve prevedere condizioni di \emph{licensing} sostenibili, evitando vincoli restrittivi legati a licenze proprietarie & Obbligatorio & Soddisfatto\\
+            \hline
+            RVO3    & Il sistema deve essere compatibile con l'infrastruttura e lo \emph{stack} tecnologico aziendale esistente & Desiderabile & Soddisfatto\\
+            \hline
+            RVD4    & Il sistema dovrebbe utilizzare tecnologie consolidate e ampiamente supportate dalla \emph{community} o dal \emph{vendor} & Desiderabile & Soddisfatto\\
+            \hline
+            \end{tabularx}
+        \end{table}%
+\subsection{Riepilogo dei requisiti raggiunti}
+\begin{table}[H]
+            \centering
+            \caption{Riepilogo dei requisiti soddisfatti}
+            \label{tab:riepilogo-requisiti-conclusioni}
+            \begin{tabular}{|l|c|c|c|c|}
+            \hline\hline
+            \rowcolor{gray!40}
+            \textbf{Tipologia} & \textbf{Obbligatorio} & \textbf{Desiderabile} & \textbf{Opzionale} & \textbf{Totale}\\
+            \hline
+            \textbf{Funzionali} & 7 & 0 & 0 & 7\\
+            \hline
+            \textbf{Non funzionali} & 4 & 1 & 0 & 5\\
+            \hline
+            \textbf{Qualitativi} & 1 & 2 & 0 & 3\\
+            \hline
+            \textbf{Vincolo} & 3 & 1 & 0 & 4\\
+            \hline
+            \textbf{Totale} & 15 & 4 & 0 & 19\\
+            \hline
+            \end{tabular}
+        \end{table}
+Dalla tabella illustrata si può notare che tutti i requisiti identificati durante l'analisi sono stati soddisfatti, con un totale di 19 requisiti raggiunti. In particolare, sono stati soddisfatti tutti i requisiti funzionali,non funzionali, qualitativi e di vincolo. Questo risultato conferma il successo del progetto nel raggiungere gli obiettivi prefissati e nel fornire una soluzione efficace per la generazione di report basata su BIRT.
+
+\section{Considerazioni finali}
+
+In conclusione, il lavoro svolto ha dimostrato la fattibilità della realizzazione di un sistema di reportistica basato su BIRT completamente personalizzato e indipendente da piattaforme server esterne.\\
+Il Proof of Concept sviluppato rappresenta una valida alternativa a soluzioni consolidate, almeno per quanto riguarda scenari di utilizzo standard, offrendo al contempo maggiore flessibilità e controllo sull'intero processo di generazione dei report.\\
+L'esperienza maturata durante lo sviluppo ha inoltre permesso di approfondire tematiche rilevanti nell'ambito dell'ingegneria del software, quali la progettazione architetturale, l'integrazione tra componenti e l'analisi delle prestazioni.\\
+Nel complesso, i risultati ottenuti confermano il raggiungimento degli obiettivi prefissati e forniscono una base solida per eventuali evoluzioni future del sistema.
 
 \section{Valutazione personale}
+Il progetto di stage ha rappresentato un'importante opportunità di crescita professionale e personale, consentendomi di applicare le conoscenze acquisite durante il percorso universitario a un contesto reale e complesso. \\
+Ringrazio l'azienda per avermi dato la possibilità di lavorare su un progetto così stimolante e per il supporto ricevuto durante tutto il periodo di stage.\\
+Ho avuto modo di confrontarmi con sfide tecniche significative, sviluppando competenze specifiche nell'ambito della generazione di report e dell'integrazione di sistemi software, nonché migliorando le mie capacità di problem solving, gestione del tempo e lavoro in team. \\
+Con questa esperienza poi ho potuto migliorare le mie capacità di analisi, progettazione e sviluppo software, permettendomi di riuscire a conciliare attività di ricerca e sviluppo con le esigenze di un progetto concreto, rispettando scadenze e obiettivi prefissati.\\
+Inoltre, l'esperienza mi ha permesso di capire meglio quale anmbito dell'informatica sia più adatto alle mie competenze e alla mia persona. \\
+Ci sono statti anche dei limiti e delle difficoltà, specie all'inizio del progetto, quando ho dovuto affrontare una curva di apprendimento piuttosto ripida per comprendere le tecnologie e gli strumenti utilizzati. Tuttavia, grazie al supporto del team e alla mia determinazione, sono riuscito a superare queste difficoltà e a portare a termine con successo il progetto.\\
+Nel complesso sono soddisfatto dei risultati ottenuti e grato per l'opportunità di aver potuto contribuire a questo progetto di ricerca.

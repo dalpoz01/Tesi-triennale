@@ -10,45 +10,49 @@ Il PoC è stato progettato per essere un'applicazione semplice ma funzionale, in
 
 \section{Tecnologie utilizzate}
 Per la realizzazione del PoC sono state utilizzate le seguenti tecnologie:
-\begin{itemize}
-    \item \textbf{Birt Design Report}: una piattaforma open-source per la creazione di report, che offre un ambiente di sviluppo integrato e una vasta gamma di funzionalità per la progettazione e la generazione di report.
-    \item \textbf{Birtruntime}: una libreria Java che consente di eseguire i report progettati con Birt Design Report in ambienti privi dell'IDE, permettendo così l'integrazione con applicazioni esterne.
-    \item \textbf{Java}: il linguaggio di programmazione utilizzato per sviluppare il motore di generazione dei report basato su Birtruntime.
+
+    \subsection{Birt Design Report}
+    Una piattaforma open-source per la creazione di report, che offre un ambiente di sviluppo integrato e una vasta gamma di funzionalità per la progettazione e la generazione di report.
+    \subsection{Birtruntime}
+    Una libreria Java che consente di eseguire i report progettati con Birt Design Report in ambienti privi dell'IDE, permettendo così l'integrazione con applicazioni esterne.
+    \subsection{Java}
+    Il linguaggio di programmazione utilizzato per sviluppare il motore di generazione dei report basato su Birtruntime.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{strumenti/java-logo.png}
     \caption{Logo di Java}
     \label{fig:logo-java}
     \end{figure}
-    \item \textbf{Python}: il linguaggio di programmazione utilizzato per sviluppare il server REST che espone le funzionalità del motore di generazione dei report tramite API HTTP.
+    \subsection{Python}
+    Il linguaggio di programmazione utilizzato per sviluppare il server REST che espone le funzionalità del motore di generazione dei report tramite API HTTP.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\textwidth]{strumenti/python-logo.png}
     \caption{Logo di Python}
     \label{fig:logo-python}
     \end{figure}
-    \item \textbf{Flask}: un framework web leggero per Python, utilizzato per implementare il server REST che gestisce le richieste dei client e coordina l'esecuzione del motore di generazione dei report.
+    \subsection{Flask}
+    Un framework web leggero per Python, utilizzato per implementare il server REST che gestisce le richieste dei client e coordina l'esecuzione del motore di generazione dei report.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.2\textwidth]{strumenti/flask-logo.png}
     \caption{Logo di Flask}
     \label{fig:logo-flask}
     \end{figure}
-    \item \textbf{Visual Studio Code}: l'ambiente di sviluppo integrato (IDE) utilizzato per scrivere e testare il codice del PoC, sia per la parte Java che per quella Python.
+    \subsection{Visual Studio Code}
+    L'ambiente di sviluppo integrato (IDE) utilizzato per scrivere e testare il codice del PoC, sia per la parte Java che per quella Python.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.1\textwidth]{strumenti/vs-code-logo.png}
     \caption{Logo di Visual Studio Code}
     \label{fig:logo-vs-code}
     \end{figure}
-\end{itemize}
 
 \section{Sviluppo del programma Java}
 \label{sec:sviluppo-java}
 \subsection{Architettura del programma}
 \label{sec:architettura-java}
 L'architettura complessiva del sistema può essere suddivisa nei seguenti livelli logici:
-
 \begin{itemize}
     \item \textbf{View}: rappresentata dalla classe \texttt{Window}, gestisce la presentazione dei dati e l'interazione con l'utente;
     
@@ -56,20 +60,25 @@ L'architettura complessiva del sistema può essere suddivisa nei seguenti livell
     
     \item \textbf{Model}: composto dalle classi \texttt{ReportConfig} e \texttt{BirtDesignToDocument}, contiene la logica di business e i dati necessari alla generazione dei report.
 \end{itemize}
-Dal punto di vista architetturale, è stata posta particolare attenzione alla gestione delle risorse, in quanto il motore BIRT richiede una corretta inizializzazione e chiusura per evitare problemi di memoria.
-
+Dal punto di vista architetturale, è stata posta particolare attenzione alla gestione delle risorse, in quanto il motore BIRT richiede una corretta inizializzazione e chiusura per evitare problemi di memoria.\\
 Per questo motivo, ogni ciclo di generazione del report prevede:
 \begin{itemize}
     \item inizializzazione controllata del motore;
     \item esecuzione isolata del task;
     \item rilascio esplicito delle risorse.
 \end{itemize}
-
-Questo approccio garantisce stabilità anche in scenari con esecuzioni ripetute.
+Questo approccio garantisce stabilità anche in scenari con esecuzioni ripetute.\\
+Come si può notare, è stato adottato un tipo di architettura MVC che consente di separare chiaramente le responsabilità tra la logica di business, la presentazione e il controllo dell'applicazione.\\
+Graficamente l'architettura del programma Java e il suo funzionamento possono essere rappresentati nel seguente modo:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{architettura/MVC.png}
+    \caption{Architettura del programma Java}
+    \label{fig:architettura-java}
+    \end{figure}
 \subsection{Classe BirtDesignToDocument}
 
-La classe \texttt{BirtDesignToDocument} rappresenta il componente centrale del programma Java sviluppato, in quanto si occupa dell'intero processo di generazione dei documenti a partire da un file di report BIRT. Essa costituisce il punto di integrazione tra l'applicazione Java e il motore di rendering fornito dalle librerie BIRT Runtime.
-
+La classe \texttt{BirtDesignToDocument} rappresenta il componente centrale del programma Java sviluppato, in quanto si occupa dell'intero processo di generazione dei documenti a partire da un file di report BIRT. Essa costituisce il punto di integrazione tra l'applicazione Java e il motore di rendering fornito dalle librerie BIRT Runtime.\\
 Il suo ruolo principale è quello di orchestrare tutte le fasi necessarie alla produzione del report finale, partendo dal caricamento del file di design fino alla generazione del documento nel formato richiesto. Questa classe incapsula quindi la logica di business legata alla reportistica, separandola dagli aspetti di interfaccia e controllo, in linea con il pattern architetturale Model-View-Controller adottato nel progetto.
 
 \subsubsection{Struttura e responsabilità della classe}
@@ -101,10 +110,8 @@ Questi attributi consentono di rendere la classe flessibile rispetto alle divers
 
 \subsection{Metodo principale \texttt{generateDocument(String format)}}
 
-Il metodo \texttt{generateDocument} rappresenta il punto di ingresso principale della classe. Esso accetta come parametro una stringa che identifica il formato di output desiderato (ad esempio PDF, DOC, XLSX o HTML).
-
-Il comportamento del metodo segue una logica di selezione: in base al formato richiesto, viene invocato uno specifico metodo di generazione. Questo approccio consente di mantenere separata la logica di rendering per ciascun formato, migliorando la leggibilità e la manutenibilità del codice.
-
+Il metodo \texttt{generateDocument} rappresenta il punto di ingresso principale della classe. Esso accetta come parametro una stringa che identifica il formato di output desiderato (ad esempio PDF, DOC, XLSX o HTML).\\
+Il comportamento del metodo segue una logica di selezione: in base al formato richiesto, viene invocato uno specifico metodo di generazione. Questo approccio consente di mantenere separata la logica di rendering per ciascun formato, migliorando la leggibilità e la manutenibilità del codice.\\
 Il metodo restituisce un valore booleano:
 \begin{itemize}
     \item \texttt{true} se la generazione del report è avvenuta con successo;
@@ -113,25 +120,26 @@ Il metodo restituisce un valore booleano:
 
 \subsection{Fasi del processo di generazione del report}
 
-Ogni metodo di generazione segue una sequenza di operazioni ben definita, articolata nelle seguenti fasi.
+Ogni metodo di generazione segue una sequenza di operazioni ben definita, articolata nelle seguenti fasi:
 
-\subsubsection{Configurazione del motore BIRT}
+\begin{itemize}
+    \item {Configurazione del motore BIRT}
 
 La prima fase consiste nella configurazione del motore di esecuzione BIRT attraverso un oggetto \texttt{EngineConfig}. In questa fase vengono definiti il percorso della directory di lavoro e la configurazione del logging.
 
 Successivamente viene avviata la piattaforma BIRT tramite il metodo \texttt{Platform.startup()}, che inizializza tutte le componenti necessarie all'esecuzione dei report.
 
-\subsubsection{Creazione del report engine}
+\item {Creazione del report engine}
 
 Una volta configurato l'ambiente, viene creato il motore di esecuzione tramite una factory (\texttt{IReportEngineFactory}). Il motore (\texttt{IReportEngine}) rappresenta il componente principale che consente di aprire i file di design e creare task di esecuzione.
 
-\subsubsection{Caricamento del report design}
+\item {Caricamento del report design}
 
 Il file di design viene caricato tramite il metodo \texttt{openReportDesign()}, che restituisce un oggetto \texttt{IReportRunnable}. Questo oggetto rappresenta il report in forma eseguibile.
 
 Successivamente viene creato un task di tipo \texttt{IRunAndRenderTask}, che consente di eseguire e renderizzare il report in un'unica operazione.
 
-\subsubsection{Gestione dei parametri JSON}
+\item{Gestione dei parametri JSON}
 
 Una fase fondamentale riguarda la gestione dei parametri di input, in particolare dei dati JSON.
 
@@ -143,7 +151,7 @@ La logica implementata distingue due casi:
 
 Questo approccio consente di supportare sia dati statici che dinamici.
 
-\subsubsection{Configurazione delle opzioni di rendering}
+\item{Configurazione delle opzioni di rendering}
 
 In base al formato richiesto vengono impostate specifiche opzioni di rendering:
 \begin{itemize}
@@ -155,11 +163,11 @@ In base al formato richiesto vengono impostate specifiche opzioni di rendering:
 
 In questa fase viene inoltre definito il nome del file di output, spesso arricchito con un timestamp per evitare sovrascritture.
 
-\subsubsection{Esecuzione del report}
+\item{Esecuzione del report}
 
 Il task viene eseguito tramite il metodo \texttt{run()}, che avvia il processo di generazione del documento. Durante questa fase il motore BIRT elabora i dati e produce il file finale.
 
-\subsubsection{Rilascio delle risorse}
+\item{Rilascio delle risorse}
 
 Al termine dell'esecuzione, vengono rilasciate le risorse utilizzate:
 \begin{itemize}
@@ -169,6 +177,7 @@ Al termine dell'esecuzione, vengono rilasciate le risorse utilizzate:
 \end{itemize}
 
 Questa fase è fondamentale per evitare problemi di memoria e garantire la stabilità dell'applicazione.
+\end{itemize}
 
 \subsection{Considerazioni progettuali}
 
@@ -302,22 +311,19 @@ Infine, il riutilizzo del codice Java sviluppato durante il \textit{Proof of Con
 \section{Implementazione della soluzione}
 \label{sec:implementazione-soluzione}
 
-Una volta definita l'architettura generale del sistema, è stata realizzata una prima implementazione con l'obiettivo di verificare la fattibilità tecnica della soluzione proposta. 
-L'implementazione sviluppata costituisce un \textit{Proof of Concept} (PoC) di un sistema di reportistica centralizzato basato sul motore di reporting BIRT.
-
-Lo scopo principale di questa fase è stato quello di costruire un prototipo funzionante in grado di generare report dinamicamente a partire da file di design \texttt{.rptdesign} e da sorgenti dati esterne esposte tramite API REST. 
-Il sistema è stato progettato per separare chiaramente la logica di generazione dei report dal livello di esposizione dei servizi, così da rendere la soluzione modulare e facilmente integrabile in contesti applicativi differenti.
-
-Dal punto di vista architetturale, l'implementazione si basa su due componenti principali: un motore di generazione dei report sviluppato in linguaggio Java e un server REST implementato in Python mediante il framework Flask. 
+Una volta definita l'architettura generale del sistema, è stata realizzata una prima implementazione con l'obiettivo di verificare la fattibilità tecnica della soluzione proposta. \\
+L'implementazione sviluppata costituisce un \textit{Proof of Concept} (PoC) di un sistema di reportistica centralizzato basato sul motore di reporting BIRT.\\
+Lo scopo principale di questa fase è stato quello di costruire un prototipo funzionante in grado di generare report dinamicamente a partire da file di design \texttt{.rptdesign} e da sorgenti dati esterne esposte tramite API REST. \\
+Il sistema è stato progettato per separare chiaramente la logica di generazione dei report dal livello di esposizione dei servizi, così da rendere la soluzione modulare e facilmente integrabile in contesti applicativi differenti.\\
+Dal punto di vista architetturale, l'implementazione si basa su due componenti principali: un motore di generazione dei report sviluppato in linguaggio Java e un server REST implementato in Python mediante il framework Flask. \\
 Il motore Java è responsabile dell'esecuzione del processo di rendering dei report tramite le librerie BIRT, mentre il server Python funge da interfaccia tra i client e il motore di generazione, gestendo le richieste e coordinando l'esecuzione delle operazioni necessarie.
 
 \subsection{Motore di generazione dei report}
 
-Il cuore del sistema è rappresentato dal motore di generazione dei report sviluppato in linguaggio Java. 
-Questo componente utilizza le librerie del runtime di BIRT per eseguire il rendering dei report definiti tramite file di design \texttt{.rptdesign}. 
-Il motore è stato progettato in modo da poter essere eseguito tramite linea di comando, consentendo così l'integrazione con altri servizi o applicazioni.
-
-La logica principale è stata incapsulata all'interno della classe \texttt{BirtReportWrapper}, che rappresenta il punto di ingresso dell'applicazione. 
+Il cuore del sistema è rappresentato dal motore di generazione dei report sviluppato in linguaggio Java. \\
+Questo componente utilizza le librerie del runtime di BIRT per eseguire il rendering dei report definiti tramite file di design \texttt{.rptdesign}. \\
+Il motore è stato progettato in modo da poter essere eseguito tramite linea di comando, consentendo così l'integrazione con altri servizi o applicazioni.\\
+La logica principale è stata incapsulata all'interno della classe \texttt{BirtReportWrapper}, che rappresenta il punto di ingresso dell'applicazione. \\
 Questa classe ha il compito di ricevere e validare i parametri necessari alla generazione del report, tra cui il percorso del file di design, l'URL della sorgente dati e il formato di output desiderato.
 
 \begin{lstlisting}[language=Java]
@@ -332,10 +338,9 @@ public class BirtReportWrapper {
 }
 \end{lstlisting}
 
-Il metodo \texttt{main} rappresenta l'entry point dell'applicazione e viene invocato quando il motore viene eseguito tramite riga di comando. 
-In questa fase vengono verificati i parametri forniti dall'utente e viene avviato il processo di generazione del report.
-
-La logica operativa del sistema è invece implementata nella classe \texttt{BirtDesignToDocument}. 
+Il metodo \texttt{main} rappresenta l'entry point dell'applicazione e viene invocato quando il motore viene eseguito tramite riga di comando. \\
+In questa fase vengono verificati i parametri forniti dall'utente e viene avviato il processo di generazione del report.\\
+La logica operativa del sistema è invece implementata nella classe \texttt{BirtDesignToDocument}. \\
 Questa classe si occupa della gestione del processo di generazione del documento e utilizza le API del motore BIRT per eseguire il rendering del report.
 
 \begin{lstlisting}[language=Java]
@@ -352,23 +357,19 @@ class BirtDesignToDocument {
 }
 \end{lstlisting}
 
-Durante l'esecuzione del metodo di generazione, il sistema effettua una serie di operazioni successive. 
-In primo luogo viene caricato il file di design del report, che definisce la struttura del documento e le modalità di visualizzazione dei dati. 
-Successivamente il motore recupera i dati dalla sorgente JSON indicata nei parametri di esecuzione, consentendo così la generazione di report dinamici basati su dati aggiornati.
-
-Una volta ottenuti i dati necessari, il motore BIRT procede con la fase di rendering del report e genera il documento finale nel formato richiesto. 
-Il sistema supporta diversi formati di esportazione, tra cui PDF e HTML, che rappresentano i formati più comuni per la distribuzione dei report.
-
+Durante l'esecuzione del metodo di generazione, il sistema effettua una serie di operazioni successive. \\
+In primo luogo viene caricato il file di design del report, che definisce la struttura del documento e le modalità di visualizzazione dei dati. \\
+Successivamente il motore recupera i dati dalla sorgente JSON indicata nei parametri di esecuzione, consentendo così la generazione di report dinamici basati su dati aggiornati.\\
+Una volta ottenuti i dati necessari, il motore BIRT procede con la fase di rendering del report e genera il documento finale nel formato richiesto.\\ 
+Il sistema supporta diversi formati di esportazione, tra cui PDF e HTML, che rappresentano i formati più comuni per la distribuzione dei report.\\
 La separazione tra la classe di avvio e la classe responsabile della generazione dei documenti consente di mantenere una struttura del codice più modulare e facilita eventuali estensioni future del sistema.
 
 \subsection{Implementazione del server REST}
 
-Per rendere il motore di generazione accessibile da applicazioni esterne è stato sviluppato un server REST in linguaggio Python utilizzando il framework Flask. 
-Questo componente svolge il ruolo di interfaccia tra i client e il motore di generazione dei report implementato in Java.
-
-Il server REST riceve le richieste dei client tramite API HTTP e si occupa di gestire l'intero flusso di generazione del report. 
-In particolare, il server valida i parametri ricevuti, prepara l'ambiente di esecuzione e avvia il processo Java responsabile della generazione del documento.
-
+Per rendere il motore di generazione accessibile da applicazioni esterne è stato sviluppato un server REST in linguaggio Python utilizzando il framework Flask. \\
+Questo componente svolge il ruolo di interfaccia tra i client e il motore di generazione dei report implementato in Java.\\
+Il server REST riceve le richieste dei client tramite API HTTP e si occupa di gestire l'intero flusso di generazione del report. \\
+In particolare, il server valida i parametri ricevuti, prepara l'ambiente di esecuzione e avvia il processo Java responsabile della generazione del documento.\\
 La configurazione iniziale del server definisce le directory utilizzate per la gestione dei file caricati, dei report generati e dei log di sistema.
 
 \begin{lstlisting}[language=Python]
@@ -382,14 +383,13 @@ app = Flask(__name__)
 CORS(app)
 \end{lstlisting}
 
-Questa organizzazione delle directory consente di mantenere separati i diversi elementi del sistema, facilitando la gestione dei file temporanei e dei documenti generati. 
+Questa organizzazione delle directory consente di mantenere separati i diversi elementi del sistema, facilitando la gestione dei file temporanei e dei documenti generati. \\
 In particolare, la directory di upload viene utilizzata per memorizzare temporaneamente i file di design dei report caricati dai client, mentre la directory di output contiene i documenti generati dal motore BIRT.
 
 \subsection{Definizione delle API REST}
 
-Il server implementa una serie di endpoint REST che consentono ai client di interagire con il sistema di reportistica. 
-Queste API permettono di verificare lo stato del servizio e di richiedere la generazione di nuovi report.
-
+Il server implementa una serie di endpoint REST che consentono ai client di interagire con il sistema di reportistica. \\
+Queste API permettono di verificare lo stato del servizio e di richiedere la generazione di nuovi report.\\
 Un primo endpoint è dedicato al controllo dello stato del server e consente di verificare rapidamente se il servizio è attivo.
 
 \begin{lstlisting}[language=Python]
@@ -398,7 +398,7 @@ def health_check():
     return {"status": "ok"}
 \end{lstlisting}
 
-L'endpoint principale del sistema è invece quello dedicato alla generazione dei report. 
+L'endpoint principale del sistema è invece quello dedicato alla generazione dei report. \\
 Questo endpoint riceve una richiesta HTTP contenente i parametri necessari alla generazione del documento, tra cui il file di design del report, l'URL della sorgente dati e il formato di output desiderato.
 
 \begin{lstlisting}[language=Python]
@@ -407,13 +407,11 @@ def generate_report():
     # gestione richiesta e avvio processo Java
 \end{lstlisting}
 
-Quando una richiesta di generazione viene ricevuta, il server esegue una serie di operazioni sequenziali. 
-In primo luogo il file di design del report viene salvato nella directory di upload. 
-Successivamente vengono estratti i parametri necessari all'esecuzione del motore BIRT, tra cui l'indirizzo della sorgente dati e il formato di output.
-
-Una volta completata la fase di preparazione, il server avvia il processo Java tramite il modulo \texttt{subprocess} di Python. 
-Questo approccio consente di mantenere separati i due ambienti di esecuzione e di riutilizzare il motore Java come componente indipendente.
-
+Quando una richiesta di generazione viene ricevuta, il server esegue una serie di operazioni sequenziali. \\
+In primo luogo il file di design del report viene salvato nella directory di upload. \\
+Successivamente vengono estratti i parametri necessari all'esecuzione del motore BIRT, tra cui l'indirizzo della sorgente dati e il formato di output.\\
+Una volta completata la fase di preparazione, il server avvia il processo Java tramite il modulo \texttt{subprocess} di Python. \\
+Questo approccio consente di mantenere separati i due ambienti di esecuzione e di riutilizzare il motore Java come componente indipendente.\\
 L'esecuzione del motore avviene tramite una chiamata a riga di comando simile alla seguente:
 
 \begin{lstlisting}
@@ -431,11 +429,9 @@ Al termine dell'esecuzione, il documento generato viene restituito al client com
 \subsection{Client di test}
 
 Durante la fase di sviluppo è stato realizzato anche un semplice client web di test, con lo scopo di facilitare la verifica del funzionamento del sistema. 
-Questo client, implementato come una pagina HTML statica, consente di inviare richieste al server REST tramite un'interfaccia grafica.
-
+Questo client, implementato come una pagina HTML statica, consente di inviare richieste al server REST tramite un'interfaccia grafica.\\
 Attraverso questa interfaccia l'utente può selezionare il file di design del report, specificare l'URL della sorgente dati e scegliere il formato di output desiderato. 
-Una volta inviati i parametri, il client invia la richiesta al server REST e consente di scaricare il report generato.
-
+Una volta inviati i parametri, il client invia la richiesta al server REST e consente di scaricare il report generato.\\
 L'utilizzo di un client di test si è rivelato particolarmente utile durante lo sviluppo del Proof of Concept, poiché ha permesso di verificare rapidamente il corretto funzionamento delle API e del processo di generazione dei report senza dover ricorrere a strumenti esterni.
 
 \begin{figure}[H]
@@ -447,58 +443,51 @@ L'utilizzo di un client di test si è rivelato particolarmente utile durante lo 
 
 \subsection{Flusso di esecuzione della richiesta}
 
-Per comprendere meglio il funzionamento complessivo del sistema sviluppato, è utile analizzare il flusso di esecuzione che porta alla generazione di un report a partire da una richiesta inviata da un client. 
-Il processo coinvolge diversi componenti dell'architettura, tra cui il client applicativo, il server REST sviluppato in Python e il motore di generazione dei report implementato in Java tramite le librerie BIRT.
-
+Per comprendere meglio il funzionamento complessivo del sistema sviluppato, è utile analizzare il flusso di esecuzione che porta alla generazione di un report a partire da una richiesta inviata da un client. \\
+Il processo coinvolge diversi componenti dell'architettura, tra cui il client applicativo, il server REST sviluppato in Python e il motore di generazione dei report implementato in Java tramite le librerie BIRT.\\
 Il flusso di esecuzione può essere suddiviso in una serie di fasi successive, ciascuna delle quali svolge un ruolo specifico all'interno del processo di generazione del report.
 
 \begin{enumerate}
 
 \item \textbf{Invio della richiesta da parte del client}
 
-Il processo ha inizio quando un client invia una richiesta HTTP al server REST tramite l'endpoint dedicato alla generazione dei report. 
-La richiesta contiene i parametri necessari alla generazione del documento, tra cui il file di design del report in formato \texttt{.rptdesign}, l'URL della sorgente dati da cui recuperare le informazioni e il formato di output desiderato.
-
+Il processo ha inizio quando un client invia una richiesta HTTP al server REST tramite l'endpoint dedicato alla generazione dei report. \\
+La richiesta contiene i parametri necessari alla generazione del documento, tra cui il file di design del report in formato \texttt{.rptdesign}, l'URL della sorgente dati da cui recuperare le informazioni e il formato di output desiderato.\\
 Nel contesto del Proof of Concept sviluppato, questa richiesta può essere inviata tramite il client web di test oppure tramite strumenti di interrogazione delle API come \textit{Postman} o \textit{curl}.
 
 \item \textbf{Ricezione e validazione della richiesta}
 
-Una volta ricevuta la richiesta, il server REST sviluppato in Python tramite il framework Flask procede alla validazione dei parametri forniti dal client. 
-In questa fase vengono controllati la presenza dei parametri obbligatori e la correttezza del file di design del report.
-
+Una volta ricevuta la richiesta, il server REST sviluppato in Python tramite il framework Flask procede alla validazione dei parametri forniti dal client. \\
+In questa fase vengono controllati la presenza dei parametri obbligatori e la correttezza del file di design del report.\\
 Il file \texttt{.rptdesign} viene quindi salvato temporaneamente nella directory di upload del server, mentre gli altri parametri della richiesta vengono preparati per l'esecuzione del processo di generazione.
 
 \item \textbf{Preparazione dell'ambiente di esecuzione}
 
-Successivamente il server prepara l'ambiente necessario all'esecuzione del motore BIRT. 
-Questa fase include la definizione dei percorsi delle directory utilizzate dal sistema, tra cui la directory di output in cui verrà salvato il report generato e la directory contenente il runtime di BIRT.
-
+Successivamente il server prepara l'ambiente necessario all'esecuzione del motore BIRT. \\
+Questa fase include la definizione dei percorsi delle directory utilizzate dal sistema, tra cui la directory di output in cui verrà salvato il report generato e la directory contenente il runtime di BIRT.\\
 Una volta completata questa fase, il server costruisce il comando che verrà utilizzato per avviare il motore di generazione dei report implementato in Java.
 
 \item \textbf{Avvio del motore di generazione dei report}
 
-Il server REST avvia quindi il motore di generazione tramite una chiamata a riga di comando utilizzando il modulo \texttt{subprocess} di Python. 
-Il comando invoca la classe principale del motore Java (\texttt{BirtReportWrapper}) e passa come parametri il file di design del report, l'URL della sorgente dati, il percorso della directory di output e il formato di esportazione richiesto.
-
+Il server REST avvia quindi il motore di generazione tramite una chiamata a riga di comando utilizzando il modulo \texttt{subprocess} di Python. \\
+Il comando invoca la classe principale del motore Java (\texttt{BirtReportWrapper}) e passa come parametri il file di design del report, l'URL della sorgente dati, il percorso della directory di output e il formato di esportazione richiesto.\\
 Durante questa fase il motore BIRT carica il file di design del report, recupera i dati dalla sorgente JSON indicata e avvia il processo di rendering del documento.
 
 \item \textbf{Generazione del report}
 
-Una volta ottenuti i dati necessari, il motore BIRT procede con la generazione del documento finale. 
-Il report viene costruito sulla base della struttura definita nel file \texttt{.rptdesign} e viene quindi esportato nel formato richiesto dal client, ad esempio PDF o HTML.
-
+Una volta ottenuti i dati necessari, il motore BIRT procede con la generazione del documento finale. \\
+Il report viene costruito sulla base della struttura definita nel file \texttt{.rptdesign} e viene quindi esportato nel formato richiesto dal client, ad esempio PDF o HTML.\\
 Il documento generato viene salvato nella directory di output configurata dal server REST.
 
 \item \textbf{Restituzione del risultato al client}
 
-Al termine del processo di generazione, il server REST recupera il file generato e lo restituisce al client come risposta alla richiesta HTTP. 
+Al termine del processo di generazione, il server REST recupera il file generato e lo restituisce al client come risposta alla richiesta HTTP. \\
 Il client può quindi scaricare il documento oppure visualizzarlo direttamente all'interno dell'applicazione che ha effettuato la richiesta.
 
 \end{enumerate}
 
-Questo flusso di esecuzione evidenzia la separazione tra il livello di esposizione dei servizi REST e il motore di generazione dei report. 
-Tale separazione consente di mantenere il sistema modulare e facilita l'integrazione della soluzione in contesti applicativi differenti, permettendo a diverse applicazioni di utilizzare il servizio di generazione dei report tramite semplici chiamate API.
-
+Questo flusso di esecuzione evidenzia la separazione tra il livello di esposizione dei servizi REST e il motore di generazione dei report. \\
+Tale separazione consente di mantenere il sistema modulare e facilita l'integrazione della soluzione in contesti applicativi differenti, permettendo a diverse applicazioni di utilizzare il servizio di generazione dei report tramite semplici chiamate API.\\
 Graficamente può essere rappresentato nel seguente modo:
 
 \begin{figure}[H]
