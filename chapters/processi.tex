@@ -5,7 +5,7 @@
 
 \section{Studio del prodotto JasperServer}
 \label{sec:studio-jasperserver}
-    La prima fase del progetto ha previsto uno studio approfondito del prodotto JasperServer, al fine di comprenderne le funzionalità, le caratteristiche tecniche e le modalità di utilizzo per poter .
+    La prima fase del progetto ha previsto uno studio approfondito del prodotto JasperServer \footcite{site:jasperreports}, al fine di comprenderne le funzionalità, le caratteristiche tecniche e le modalità di utilizzo per poter .
     Per analizzare il prodotto JasperServer sono state utilizzate diverse metodologie di analisi, tra cui:
     \begin{itemize}
         \item \textbf{Analisi documentale}: è stata effettuata una revisione approfondita della documentazione ufficiale di JasperServer, inclusi manuali utente, guide di installazione e documenti tecnici. Questo ha permesso di comprendere le funzionalità principali del prodotto, le sue caratteristiche tecniche e le modalità di utilizzo.
@@ -163,7 +163,7 @@ Particolare attenzione è stata posta alla disponibilità di un editor grafico p
 Lo studio della documentazione ha incluso anche una valutazione preliminare dell'esperienza di sviluppo, analizzando la chiarezza della documentazione, la presenza di esempi e la maturità delle \emph{\gls{apig}} fornite. Infine, sono stati considerati gli aspetti di licensing, al fine di individuare eventuali limitazioni o vincoli incompatibili con il contesto aziendale.\\
 Sulla base delle informazioni raccolte, è stato possibile effettuare una prima selezione delle soluzioni più promettenti, individuando quelle che soddisfacevano i requisiti obbligatori e che risultavano maggiormente adatte a essere approfondite attraverso la realizzazione di un Proof of Concept.\\
 Lo studio della documentazione ufficiale ha permesso di ridurre il rischio di implementazione, orientando la scelta verso soluzioni coerenti con i requisiti aziendali prima di procedere alla fase di sperimentazione pratica.\\
-Di seguito viene riportata una tabella riassuntiva delle tecnologie analizzate, evidenziando la tipologia, i principali motivi di inclusione e i limiti principali rispetto ai requisiti individuati:
+Di seguito, nella tabella \ref{tab:confronto-reporting}, viene riportata una comparazione delle tecnologie analizzate, evidenziando la tipologia, i principali motivi di inclusione e i limiti principali rispetto ai requisiti individuati:
 \begin{table}[H]%
 \centering
 \renewcommand{\arraystretch}{1.3}
@@ -254,16 +254,18 @@ Per poterlo analizzare è stato scelto di utilizzare un'immagine docker ufficial
 e anche l'installazione locale, che fornisce il prodotto in versione 8.1.7 in modo da poter verificare nel modo più completo possibile l'effettiva disponibilità delle funzionalità offerte.\\
 L'analisi in questo punto è stata focalizzata principalmente sulla possibilità di eseguire il deploy di report da programma Birt Design Report, sulla possibilità di eseguire i report tramite \emph{\gls{apig}} e sulla possibilità di passare dati in formato JSON tramite parametro.\\
 Le prove per poter eseguire il deploy dei report da Birt Design Report sono state effettuate sia tramite l'interfaccia grafica di Knowage che tramite \emph{\gls{apig}}.\\
-Per quanto riguarda l'interfaccia grafica, essa presenta alcune discrepanze rispetto alla documentazione ufficiale, in quanto non è presente una sezione dedicata al deploy dei report ne al caricamento degli stessi, come è possibile verificare nelle immagini sottostanti.\\
+Per quanto riguarda l'interfaccia grafica essa presenta alcune discrepanze rispetto alla documentazione ufficiale, come visibile nelle figure \ref{fig:knowage-ufficiale} e \ref{fig:knowage-locale}, in quanto non è presente una sezione dedicata al deploy dei report ne al caricamento degli stessi, come è possibile verificare nelle immagini sottostanti.\\
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\columnwidth]{analisi-tecnologie/Knowage_impostazioni_ufficiale.png}
     \caption{Interfaccia grafica di Knowage ufficiale}
+    \label{fig:knowage-ufficiale}
 \end{figure}
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.9\columnwidth]{analisi-tecnologie/Knowage_impostazioni_locale.png}
     \caption{Interfaccia grafica di Knowage installata}
+    \label{fig:knowage-locale}
 \end{figure}
 Da successive verifiche non sono emerse altre versioni disponibili se non quelle già considerate, per cui è stato possibile escludere questa funzionalità.\\
 

@@ -40,7 +40,12 @@ Per la raccolta delle metriche prestazionali sono stati utilizzati strumenti dif
 \begin{itemize}
     \item per JasperServer è stato utilizzato il pannello \textit{Network} degli strumenti di sviluppo del browser Google Chrome, che consente di misurare i tempi di risposta delle richieste HTTP;
     
-    \item per il PoC è stato utilizzato VisualVM, uno strumento open-source per il monitoraggio delle applicazioni Java, utile per osservare tempi di esecuzione e comportamento del sistema.
+    \item per il PoC è stato utilizzato VisualVM \footcite{site:visualvm}, uno strumento open-source per il monitoraggio delle applicazioni Java, utile per osservare tempi di esecuzione e comportamento del sistema.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width=0.2\columnwidth]{strumenti/visualvm-logo.png} 
+        \caption{Logo di VisualVM}
+    \end{figure}
 \end{itemize}
 
 Questa scelta è stata dettata dalla diversa modalità di esecuzione delle due soluzioni, una basata su server e l'altra su applicazione locale.
@@ -72,18 +77,18 @@ I risultati hanno evidenziato che:
 \end{itemize}
 
 Questo comportamento è coerente con la presenza di meccanismi di caching e inizializzazione nei sistemi server-based.\\
-Di seguito è riportata una grafica per Jasper server e di seguito una grafica del PoC che confronta i tempi di generazione dei report per entrambe le soluzioni nel primo scenario:
+Di seguito è riportata una grafica per Jasper server (fig. \ref{fig:scenario1}) e una grafica del PoC (fig. \ref{fig:scenario1_PoC}) che confronta i tempi di generazione dei report per entrambe le soluzioni nel primo scenario:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi.png}
-    \caption{Confronto dei tempi di generazione dei report nel primo scenario}
+    \caption{Tempi di generazione dei report JasperServer nel primo scenario}
     \label{fig:scenario1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{prestazioni/PoC_tempi.png}
-    \caption{Confronto dei tempi di generazione dei report nel primo scenario}
+    \caption{Tempi di generazione dei report PoC nel primo scenario}
     \label{fig:scenario1_PoC}
 \end{figure}
 
@@ -91,18 +96,18 @@ Di seguito è riportata una grafica per Jasper server e di seguito una grafica d
 
 Nel secondo scenario, caratterizzato da un dataset di circa 100 elementi, si osserva un aumento dei tempi di generazione per entrambe le soluzioni.\\
 Il PoC mantiene tempi di risposta comparabili con JasperServer nelle esecuzioni successive, mentre la prima esecuzione continua a rappresentare il caso più oneroso in termini computazionali.\\
-Di seguito è riportata una grafica per Jasper server e di seguito una grafica del PoC che confronta i tempi di generazione dei report per entrambe le soluzioni nel secondo scenario:
+Di seguito è riportata una grafica per Jasper server (fig. \ref{fig:scenario2}) e una grafica del PoC (fig. \ref{fig:scenario2_PoC}) che confronta i tempi di generazione dei report per entrambe le soluzioni nel secondo scenario:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi_100.png}
-    \caption{Confronto dei tempi di generazione dei report nel secondo scenario}
+    \caption{Tempi di generazione dei report JasperServer nel secondo scenario}
     \label{fig:scenario2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{prestazioni/PoC_tempi_100.png}
-    \caption{Confronto dei tempi di generazione dei report nel secondo scenario}
+    \caption{Tempi di generazione dei report PoC nel secondo scenario}
     \label{fig:scenario2_PoC}
 \end{figure}
 \subsection{Terzo scenario: dataset esteso}
@@ -110,35 +115,35 @@ Di seguito è riportata una grafica per Jasper server e di seguito una grafica d
 Nel terzo scenario, con dataset di circa 1000 elementi, emerge in modo più evidente l'impatto della dimensione dei dati sulle prestazioni.\\
 Entrambe le soluzioni mostrano un incremento significativo dei tempi di elaborazione, evidenziando come la fase di parsing e gestione dei dati JSON rappresenti uno dei principali colli di bottiglia.\\
 Nonostante ciò, il comportamento del PoC rimane stabile e in linea con quello della soluzione di riferimento.\\
-Di seguito è riportata una grafica per Jasper server e di seguito una grafica del PoC che confronta i tempi di generazione dei report per entrambe le soluzioni nel terzo scenario:
+Di seguito è riportata una grafica per Jasper server (fig. \ref{fig:scenario3})e una grafica del PoC (fig. \ref{fig:scenario3_PoC}) che confronta i tempi di generazione dei report per entrambe le soluzioni nel terzo scenario:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi_1000.png}
-    \caption{Confronto dei tempi di generazione dei report nel terzo scenario}
+    \caption{Tempi di generazione dei report JasperServer nel terzo scenario}
     \label{fig:scenario3}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{prestazioni/PoC_tempi_1000.png}
-    \caption{Confronto dei tempi di generazione dei report nel terzo scenario}
+    \caption{Tempi di generazione dei report PoC nel terzo scenario}
     \label{fig:scenario3_PoC}
 \end{figure}
 \subsection{Quarto scenario: report senza dati}
 
 Nel caso di report senza dati, i tempi di generazione risultano estremamente ridotti, evidenziando come il costo computazionale sia fortemente influenzato dalla quantità di dati da elaborare piuttosto che dalla struttura del report stesso.\\
-Di seguito è riportata una grafica per Jasper server e di seguito una grafica del PoC che confronta i tempi di generazione dei report per entrambe le soluzioni nel quarto scenario:
+Di seguito è riportata una grafica per Jasper server (fig. \ref{fig:scenario4}) e una grafica del PoC (fig. \ref{fig:scenario4_PoC})  che confronta i tempi di generazione dei report per entrambe le soluzioni nel quarto scenario:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi_vuoto.png}
-    \caption{Confronto dei tempi di generazione dei report nel quarto scenario}
+    \caption{Tempi di generazione dei report JasperServer nel quarto scenario}
     \label{fig:scenario4}
 \end{figure}
 
 \begin{figure}[H]   
     \centering
     \includegraphics[width=0.8\textwidth]{prestazioni/PoC_tempi_vuoto.png}
-    \caption{Confronto dei tempi di generazione dei report nel quarto scenario}
+    \caption{Tempi di generazione dei report PoC nel quarto scenario}
     \label{fig:scenario4_PoC}
 \end{figure}
 
@@ -147,7 +152,24 @@ Di seguito è riportata una grafica per Jasper server e di seguito una grafica d
 Dall'analisi complessiva dei risultati emergono alcune considerazioni rilevanti.\\
 In primo luogo, il tempo di inizializzazione rappresenta un fattore critico, in particolare per JasperServer, che richiede un overhead maggiore a causa della sua architettura basata su container e servizi.\\
 In secondo luogo, le prestazioni delle due soluzioni risultano comparabili nelle esecuzioni successive alla prima, suggerendo che il PoC sviluppato è in grado di competere, almeno in termini di tempi di generazione, con una soluzione consolidata come JasperServer.\\
-Un ulteriore elemento da considerare è l'impatto della dimensione dei dati: all'aumentare del dataset, i tempi di elaborazione crescono in modo significativo, evidenziando la necessità di ottimizzazioni, soprattutto nella fase di parsing dei dati JSON.
+Un ulteriore elemento da considerare è l'impatto della dimensione dei dati: all'aumentare del dataset, i tempi di elaborazione crescono in modo significativo, evidenziando la necessità di ottimizzazioni, soprattutto nella fase di parsing dei dati JSON.\\
+Di seguito vengono riassiunti nella tabella \ref{tab:tempi-generazione} i tempi medi di generazione dei report per entrambe le soluzioni nei diversi scenari testati:
+\begin{table}[H]
+    \centering
+    \caption{Tempi medi di generazione dei report nei diversi scenari}
+    \label{tab:tempi-generazione}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \rowcolor{gray!40}
+        \textbf{Scenario} & \textbf{JasperServer} & \textbf{PoC} \\
+        \hline
+        Primo & 6,652 s & 4,724 s \\
+        Secondo & 6,358 s & 4,092 s \\
+        Terzo & 4,613 s & 10,358 s \\
+        Quarto & 4,76 s & 5,132 s \\
+        \hline
+    \end{tabular}
+\end{table}
 
 \section{Limiti dei test}
 

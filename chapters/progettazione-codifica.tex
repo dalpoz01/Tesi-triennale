@@ -8,15 +8,25 @@ A seguito delle analisi e dei confronti effettuati si è scelto di procedere all
 L'obiettivo del PoC è quello di dimostrare la fattibilità tecnica di un sistema di reportistica basato su Birt Design Report e Birtruntime, evidenziando le potenzialità e i vantaggi di questa soluzione rispetto ad altre opzioni considerate.\\
 Il PoC è stato progettato per essere un'applicazione semplice ma funzionale, in grado di generare report basati su template predefiniti e di visualizzarli in un formato leggibile.\\
 
-\section{Tecnologie utilizzate}
-Per la realizzazione del PoC sono state utilizzate le seguenti tecnologie:
-
+\section{Tecnologie e strumenti utilizzati}
+\label{sec:tecnologie-strumenti-utilizzati}
+In questa sezione vengono analizzate le principali tecnologie utilizzate nello sviluppo del progetto. Per ciascuna di esse vengono descritti il ruolo, i punti di forza, le possibili alternative e le motivazioni che hanno portato alla scelta finale.
     \subsection{Birt Design Report}
-    Una piattaforma open-source per la creazione di report, che offre un ambiente di sviluppo integrato e una vasta gamma di funzionalità per la progettazione e la generazione di report.
+    \label{subsec:birt-design-report}
+    Una piattaforma open-source per la creazione di report, che offre un ambiente di sviluppo integrato e una vasta gamma di funzionalità per la progettazione e la generazione di report.\\
+    E' la base su cui si è deciso di costruire il sistema di reportistica, grazie alla sua flessibilità e alla possibilità di integrare dati da diverse fonti, inclusi servizi REST che restituiscono dati in formato JSON, e per il fatto di essere la base di studio del progetto.\\
     \subsection{Birtruntime}
-    Una libreria Java che consente di eseguire i report progettati con Birt Design Report in ambienti privi dell'IDE, permettendo così l'integrazione con applicazioni esterne.
+    \label{subsec:birtruntime}
+    E' una libreria Java che consente di eseguire i report progettati con Birt Design Report in ambienti privi dell'IDE, permettendo così l'integrazione con applicazioni esterne.\\
+    La scelta di Birtruntime è stata motivata dalla necessità di disporre di uno strumento che consentisse di eseguire i report in modo autonomo, senza dover dipendere dall'ambiente di sviluppo.\\
+    Constituisce, assieme a birt design report, la base su cui è stato costruito il sistema di reportistica, permettendo di eseguire i report progettati con Birt Design Report in ambienti privi dell'IDE, consentendo così l'integrazione con applicazioni esterne.
     \subsection{Java}
-    Il linguaggio di programmazione utilizzato per sviluppare il motore di generazione dei report basato su Birtruntime.
+    \label{subsec:java}
+    Java è un linguaggio di programmazione orientato agli oggetti, progettato per garantire portabilità e affidabilità attraverso l'utilizzo della Java Virtual Machine (JVM). Il codice sorgente viene compilato in bytecode, rendendo possibile l'esecuzione su diverse piattaforme senza modifiche.\\
+    Uno degli aspetti più rilevanti di Java è la sua solidità, dovuta anche alla gestione automatica della memoria tramite garbage collection e alla presenza di un sistema di tipi fortemente strutturato. Inoltre, l'ampio ecosistema di librerie e framework ne favorisce l'impiego in contesti applicativi complessi.\\
+    Tra le possibili alternative si possono considerare C++, che offre un maggiore controllo a basso livello ma richiede una gestione manuale delle risorse, e C\#, che presenta caratteristiche simili a Java ma è maggiormente integrato nell'ambiente Microsoft.\\
+    Nel contesto del progetto, Java è stato scelto per la sua affidabilità e per la familiarità acquisita durante il percorso accademico. La sua struttura orientata agli oggetti ha inoltre facilitato la realizzazione di componenti modulari e facilmente manutenibili.\\
+    Esso è stato utilizzato per implementare il motore di generazione dei report, sfruttando le API di BIRT Runtime per eseguire il rendering dei documenti a partire dai file di design.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{strumenti/java-logo.png}
@@ -24,7 +34,11 @@ Per la realizzazione del PoC sono state utilizzate le seguenti tecnologie:
     \label{fig:logo-java}
     \end{figure}
     \subsection{Python}
-    Il linguaggio di programmazione utilizzato per sviluppare il server REST che espone le funzionalità del motore di generazione dei report tramite API HTTP.
+    \label{subsec:python}
+    Python è un linguaggio di programmazione ad alto livello caratterizzato da una sintassi semplice e intuitiva, che lo rende particolarmente adatto allo sviluppo rapido di applicazioni. Negli ultimi anni ha trovato ampia diffusione in diversi ambiti, tra cui sviluppo web, automazione e analisi dei dati.\\
+    Uno dei principali vantaggi di Python è la leggibilità del codice, che consente di comprendere facilmente anche programmi complessi. A questo si aggiunge la disponibilità di numerose librerie che permettono di estendere rapidamente le funzionalità dell'applicazione senza dover implementare tutto da zero.\\
+    Tra le alternative si possono citare JavaScript, utilizzato spesso lato server tramite Node.js, oppure Java, che offre prestazioni maggiori ma risulta generalmente più verboso. Un'altra opzione è Go, che garantisce buone performance ma è meno diffuso nel contesto considerato.\\
+    La scelta di Python è stata dettata principalmente dalla necessità di sviluppare in modo rapido e mantenere il codice facilmente comprensibile. Questo ha permesso di concentrarsi maggiormente sulla logica applicativa piuttosto che sugli aspetti sintattici del linguaggio.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\textwidth]{strumenti/python-logo.png}
@@ -32,7 +46,12 @@ Per la realizzazione del PoC sono state utilizzate le seguenti tecnologie:
     \label{fig:logo-python}
     \end{figure}
     \subsection{Flask}
-    Un framework web leggero per Python, utilizzato per implementare il server REST che gestisce le richieste dei client e coordina l'esecuzione del motore di generazione dei report.
+    \label{subsec:flask}
+    Flask è un micro-framework web sviluppato in Python, progettato per la realizzazione di applicazioni web leggere e modulari. A differenza di framework più strutturati, fornisce un insieme ridotto di funzionalità di base, lasciando allo sviluppatore la libertà di integrare librerie aggiuntive in base alle esigenze del progetto.\\
+    Uno dei principali punti di forza di Flask risiede nella sua semplicità e flessibilità. La struttura minimale consente di sviluppare rapidamente prototipi funzionanti e di mantenere il codice facilmente leggibile e manutenibile. Inoltre, la vasta documentazione disponibile e il supporto della community facilitano la risoluzione di eventuali problematiche.\\
+    Tra le alternative più rilevanti vi è FastAPI, anch'esso basato su Python, che offre prestazioni superiori grazie al supporto nativo per la programmazione asincrona e include funzionalità avanzate come la generazione automatica della documentazione delle API. Un'altra alternativa è Django, un framework completo che integra numerosi strumenti pronti all'uso, ma che risulta più complesso e meno flessibile.\\
+    La scelta di Flask è stata motivata dalla necessità di disporre di uno strumento leggero e facilmente configurabile, adeguato alla complessità del progetto. In particolare, non essendo richieste funzionalità avanzate come l'elaborazione asincrona o un'infrastruttura fortemente strutturata, Flask ha rappresentato la soluzione più equilibrata in termini di semplicità, controllo e rapidità di sviluppo.\\
+    Esso è stato utilizzato per implementare il server REST che gestisce le richieste di generazione dei report, consentendo di esporre un'interfaccia HTTP semplice e intuitiva per l'interazione con i client.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.2\textwidth]{strumenti/flask-logo.png}
@@ -40,7 +59,10 @@ Per la realizzazione del PoC sono state utilizzate le seguenti tecnologie:
     \label{fig:logo-flask}
     \end{figure}
     \subsection{Visual Studio Code}
-    L'ambiente di sviluppo integrato (IDE) utilizzato per scrivere e testare il codice del PoC, sia per la parte Java che per quella Python.
+    \label{subsec:vs-code}
+    Visual Studio Code \footcite{site:visual-studio-code} è un editor di codice sviluppato da Microsoft, ampiamente utilizzato per lo sviluppo software grazie alla sua leggerezza e alla grande possibilità di personalizzazione tramite estensioni.\\
+    Uno dei suoi principali punti di forza è la capacità di adattarsi a diversi linguaggi e tecnologie, rendendolo uno strumento versatile all'interno di progetti eterogenei. L'integrazione con Git, il supporto al debugging e le funzionalità di autocompletamento contribuiscono a migliorare significativamente la produttività durante lo sviluppo.\\
+    Nel progetto è stato scelto Visual Studio Code in quanto rappresenta un buon compromesso tra semplicità e funzionalità. La possibilità di configurarlo in base alle esigenze specifiche ha reso più efficiente lo sviluppo, soprattutto considerando l'utilizzo di tecnologie differenti.
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.1\textwidth]{strumenti/vs-code-logo.png}
@@ -69,10 +91,10 @@ Per questo motivo, ogni ciclo di generazione del report prevede:
 \end{itemize}
 Questo approccio garantisce stabilità anche in scenari con esecuzioni ripetute.\\
 Come si può notare, è stato adottato un tipo di architettura MVC che consente di separare chiaramente le responsabilità tra la logica di business, la presentazione e il controllo dell'applicazione.\\
-Graficamente l'architettura del programma Java e il suo funzionamento possono essere rappresentati nel seguente modo:
+Graficamente l'architettura del programma Java e il suo funzionamento sono rappresentati nella figura \ref{fig:architettura-java}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{architettura/MVC.png}
+    \includegraphics[width=0.8\textwidth]{architettura/MVC_nosfondo.png}
     \caption{Architettura del programma Java}
     \label{fig:architettura-java}
     \end{figure}
@@ -178,6 +200,14 @@ Al termine dell'esecuzione, vengono rilasciate le risorse utilizzate:
 
 Questa fase è fondamentale per evitare problemi di memoria e garantire la stabilità dell'applicazione.
 \end{itemize}
+Lo schema di flusso del processo di generazione è rappresentato nella figura \ref{fig:flusso-generazione}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{architettura/schema_di_flusso_1.png}
+    \caption{Flusso di generazione del report}
+    \label{fig:flusso-generazione}
+\end{figure}
+
 
 \subsection{Considerazioni progettuali}
 
@@ -189,9 +219,8 @@ La progettazione della classe segue principi fondamentali dell'ingegneria del so
     \item manutenibilità.
 \end{itemize}
 
-L'utilizzo delle API ufficiali di BIRT consente inoltre di garantire affidabilità e compatibilità con il framework.
-
-Graficamente l'applicvativo si presente in questo modo:
+L'utilizzo delle API ufficiali di BIRT consente inoltre di garantire affidabilità e compatibilità con il framework.\\
+Graficamente l'applicativo si presenta come in figura \ref{fig:app-java}, con un'interfaccia semplice che consente di selezionare il file di design, specificare la sorgente dei dati e avviare il processo di generazione del report.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{architettura/Applicativo_principale.png}
@@ -300,7 +329,7 @@ L'architettura proposta presenta diversi vantaggi dal punto di vista della modul
 In primo luogo, la separazione tra il motore di generazione dei report e il server REST consente di isolare la logica di business relativa alla creazione dei report dalla gestione delle richieste HTTP. Questa scelta progettuale migliora la manutenibilità del sistema e facilita eventuali modifiche o estensioni future.
 Un ulteriore vantaggio è rappresentato dall'utilizzo di un'interfaccia REST standardizzata, che consente di integrare facilmente il servizio di reportistica con altre applicazioni o servizi software. Qualsiasi sistema in grado di effettuare chiamate HTTP può infatti richiedere la generazione di un report.
 Infine, il riutilizzo del codice Java sviluppato durante il \textit{Proof of Concept} locale ha consentito di ridurre i tempi di sviluppo e di mantenere la compatibilità con i report già progettati utilizzando \textit{BIRT Designer}, rendendo la soluzione proposta particolarmente adatta a scenari di integrazione con sistemi esistenti.
-
+Graficamente l'architettura complessiva del sistema è rappresentata nella figura \ref{fig:architettura-poc}, che illustra le componenti principali e le interazioni tra di esse.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{architettura/architettura-nosfondo.png}
@@ -388,19 +417,30 @@ In particolare, la directory di upload viene utilizzata per memorizzare temporan
 
 \subsection{Definizione delle API REST}
 
-Il server implementa una serie di endpoint REST che consentono ai client di interagire con il sistema di reportistica. \\
-Queste API permettono di verificare lo stato del servizio e di richiedere la generazione di nuovi report.\\
-Un primo endpoint è dedicato al controllo dello stato del server e consente di verificare rapidamente se il servizio è attivo.
+Il server implementa una serie di endpoint REST che consentono ai client di interagire con il sistema di reportistica. Queste API permettono di verificare lo stato del servizio e di richiedere la generazione di nuovi report.\\
+Nella tabella \ref{tab:API-endpoints} sono elencati gli endpoint esposti dal server REST:
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor{gray!40}
+\textbf{Endpoint} & \textbf{Descrizione} \\ \hline
+\texttt{/api/reports/health} & Controllo dello stato del server \\ \hline
+\texttt{/api/reports/generate} & Generazione di un nuovo report \\ \hline
+\end{tabular}
+\caption{Endpoint REST del server di reportistica}
+\label{tab:API-endpoints}
+\end{table}
 
+Il primo endpoint è dedicato al controllo dello stato del server e consente di verificare rapidamente se il servizio è attivo.
 \begin{lstlisting}[language=Python]
 @app.route('/api/reports/health', methods=['GET'])
 def health_check():
     return {"status": "ok"}
 \end{lstlisting}
 
-L'endpoint principale del sistema è invece quello dedicato alla generazione dei report. \\
+Il secondo endpoint del sistema è invece quello dedicato alla generazione dei report. \\
 Questo endpoint riceve una richiesta HTTP contenente i parametri necessari alla generazione del documento, tra cui il file di design del report, l'URL della sorgente dati e il formato di output desiderato.
-
 \begin{lstlisting}[language=Python]
 @app.route('/api/reports/generate', methods=['POST'])
 def generate_report():
@@ -432,8 +472,8 @@ Durante la fase di sviluppo è stato realizzato anche un semplice client web di 
 Questo client, implementato come una pagina HTML statica, consente di inviare richieste al server REST tramite un'interfaccia grafica.\\
 Attraverso questa interfaccia l'utente può selezionare il file di design del report, specificare l'URL della sorgente dati e scegliere il formato di output desiderato. 
 Una volta inviati i parametri, il client invia la richiesta al server REST e consente di scaricare il report generato.\\
-L'utilizzo di un client di test si è rivelato particolarmente utile durante lo sviluppo del Proof of Concept, poiché ha permesso di verificare rapidamente il corretto funzionamento delle API e del processo di generazione dei report senza dover ricorrere a strumenti esterni.
-
+L'utilizzo di un client di test si è rivelato particolarmente utile durante lo sviluppo del Proof of Concept, poiché ha permesso di verificare rapidamente il corretto funzionamento delle API e del processo di generazione dei report senza dover ricorrere a strumenti esterni.\\
+Graficamente, il client di test si presenta come in figura \ref{fig:client-test}, con un'interfaccia semplice e intuitiva che consente di interagire facilmente con il sistema di reportistica.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{architettura/test_server.png}
@@ -488,7 +528,7 @@ Il client può quindi scaricare il documento oppure visualizzarlo direttamente a
 
 Questo flusso di esecuzione evidenzia la separazione tra il livello di esposizione dei servizi REST e il motore di generazione dei report. \\
 Tale separazione consente di mantenere il sistema modulare e facilita l'integrazione della soluzione in contesti applicativi differenti, permettendo a diverse applicazioni di utilizzare il servizio di generazione dei report tramite semplici chiamate API.\\
-Graficamente può essere rappresentato nel seguente modo:
+Graficamente viene rappresentato nella figura \ref{fig:poc-flusso-esecuzione}.
 
 \begin{figure}[H]
 \centering
