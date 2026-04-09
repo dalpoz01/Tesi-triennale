@@ -4,14 +4,11 @@
 \intro{In questo capitolo viene presentata la descrizione dello \emph{stage}, con particolare attenzione al progetto svolto, ai rischi identificati e agli obiettivi raggiunti.}\\
 
 \section{Introduzione al progetto}
-
 Lo \emph{stage} si è svolto presso l'azienda Bluenext Srl, specializzata nello sviluppo di soluzioni software personalizzate per le imprese.
 L'obiettivo principale dello \emph{stage} è stato quello di ricercare e analizzare sistemi di reportistica centralizzata, con particolare attenzione alle alternative a JasperServer.
 Il progetto ha previsto una fase di analisi delle soluzioni esistenti, seguita dalla progettazione e implementazione di un prototipo basato su una delle alternative individuate.
 
-
 \section{Analisi preventiva dei rischi}
-
 L'analisi preventiva dei rischi ha l'obiettivo di identificare possibili criticità tecniche, organizzative e prestazionali, al fine di definire strategie di mitigazione e garantire l'affidabilità della soluzione proposta.\\ 
 In una prima fase di analisi iniziale sono stati individuati alcuni possibili rischi a cui si potrà andare incontro.
 Si è quindi proceduto a elaborare delle possibili soluzioni per far fronte a tali rischi.\\
@@ -30,13 +27,13 @@ Si è quindi proceduto a elaborare delle possibili soluzioni per far fronte a ta
 
 \begin{risk}{Integrazione tra componenti eterogenei}
     \vspace{0.5em}
-    \riskdescription{L'integrazione tra componenti sviluppati in ambienti e linguaggi differenti (\emph{Java} per il motore di reportistica e \emph{Python} per il server \emph{REST}) potrebbe generare problemi di comunicazione, gestione degli errori o incompatibilità nei formati dei dati scambiati}
+    \riskdescription{L'integrazione tra componenti sviluppati in ambienti e linguaggi differenti (\emph{\gls{Javag}\glsfirstoccur} per il motore di reportistica e \emph{\gls{pythong}\glsfirstoccur} per il server \emph{\gls{restg}\glsfirstoccur}) potrebbe generare problemi di comunicazione, gestione degli errori o incompatibilità nei formati dei dati scambiati}
     \vspace{0.5em}
     \riskimpact{Alto}
     \vspace{0.5em}
     \riskprobability{Media}
     \vspace{0.5em}
-    \risksolution{Definizione di interfacce \emph{\gls{restg}\glsfirstoccur} standardizzate, utilizzo di formati di scambio dati strutturati (\emph{JSON}) e \emph{test} incrementali delle \emph{\gls{apig}\glsfirstoccur} per verificare il corretto funzionamento delle interazioni tra i componenti}
+    \risksolution{Definizione di interfacce \emph{\gls{restg}} standardizzate, utilizzo di formati di scambio dati strutturati (\emph{\gls{JSONg}\glsfirstoccur}) e \emph{test} incrementali delle \emph{\gls{apig}\glsfirstoccur} per verificare il corretto funzionamento delle interazioni tra i componenti}
     \label{risk:integrazione-eterogenea} 
 \end{risk}
 
@@ -66,7 +63,7 @@ Si è quindi proceduto a elaborare delle possibili soluzioni per far fronte a ta
 
 \begin{risk}{Dipendenza da tecnologie di terze parti}
     \vspace{0.5em}
-    \riskdescription{L'utilizzo di \emph{framework} e librerie di terze parti (\emph{JasperReports}, \emph{BIRT Runtime}, \emph{Java}, \emph{Python}) introduce una dipendenza da tecnologie esterne, con possibili problemi di compatibilità, supporto o aggiornamenti futuri}
+    \riskdescription{L'utilizzo di \emph{framework} e librerie di terze parti (\emph{JasperReports}, \emph{BIRT Runtime}, \emph{\gls{Javag}}, \emph{\gls{pythong}}) introduce una dipendenza da tecnologie esterne, con possibili problemi di compatibilità, supporto o aggiornamenti futuri}
     \vspace{0.5em}
     \riskimpact{Medio}
     \vspace{0.5em}
@@ -98,7 +95,7 @@ Nella tabella \ref{tab:obiettivi} sono elencati gli obiettivi dello \emph{stage}
         \rowcolor{gray!40}
         \multicolumn{2}{|c|}{\textbf{Obiettivi Obbligatori}} \\ \hline
         OB1 & Studio documentazione e analisi comparativa \\ \hline
-        OB2 & Valutazione e implementazione PoC di due soluzioni alternative \\ \hline
+        OB2 & Valutazione e implementazione \emph{\gls{PoCg}\glsfirstoccur} di due soluzioni alternative \\ \hline
         OB3 & Documentazione configurazione \\ \hline
 
         \rowcolor{gray!40}
@@ -113,7 +110,6 @@ Nella tabella \ref{tab:obiettivi} sono elencati gli obiettivi dello \emph{stage}
         FA2 & Integrazione di funzioni di reporting personalizzato \\ \hline
     \end{tabular}
 \end{table}
-
 Per l'analisi dei requisiti si rimanda al Capitolo \ref{cap:analisi-requisiti} per definirli in dettaglio e in modo più strutturato.
 
 \section{Pianificazione}

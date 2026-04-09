@@ -1,25 +1,22 @@
 \chapter{Conclusioni}
 \label{cap:conclusioni}
 
-Il presente elaborato ha avuto come obiettivo principale l'analisi e la valutazione di soluzioni per la generazione di report, con particolare attenzione alla possibilità di realizzare un sistema personalizzato basato sull'utilizzo del motore BIRT. A partire da un'analisi preliminare delle principali piattaforme di reporting, è stato progettato e sviluppato un Proof of Concept (PoC) volto a dimostrare la fattibilità di un approccio alternativo rispetto a soluzioni consolidate come JasperServer.\\
-Il lavoro svolto ha previsto diverse fasi: una prima fase di studio delle tecnologie esistenti, una fase di progettazione dell'architettura software e infine una fase di implementazione e testing. In particolare, è stata sviluppata la componente centrale \texttt{BirtDesignToDocument}, responsabile della generazione dei documenti a partire da file di design BIRT e dati in formato JSON, integrata all'interno di un'architettura di tipo Model-View-Controller.
+Il presente elaborato ha avuto come obiettivo principale l'analisi e la valutazione di soluzioni per la generazione di report, con particolare attenzione alla possibilità di realizzare un sistema personalizzato basato sull'utilizzo del motore BIRT. A partire da un'analisi preliminare delle principali piattaforme di reporting, è stato progettato e sviluppato un \emph{\gls{PoCg}} volto a dimostrare la fattibilità di un approccio alternativo rispetto a soluzioni consolidate come JasperServer.\\
+Il lavoro svolto ha previsto diverse fasi: una prima fase di studio delle tecnologie esistenti, una fase di progettazione dell'architettura software e infine una fase di implementazione e testing. In particolare, è stata sviluppata la componente centrale \texttt{BirtDesignToDocument}, responsabile della generazione dei documenti a partire da file di design BIRT e dati in formato \emph{\gls{JSONg}}, integrata all'interno di un'architettura di tipo Model-View-Controller.
 
 \section{Risultati ottenuti}
-
-I risultati ottenuti dimostrano che il Proof of Concept sviluppato è in grado di soddisfare i requisiti funzionali definiti nella fase di analisi. In particolare, il sistema consente di generare report in diversi formati (PDF, DOC, XLSX, HTML) a partire da dati strutturati, garantendo flessibilità e indipendenza da piattaforme server esterne.\\
+I risultati ottenuti dimostrano che il Proof of Concept sviluppato è in grado di soddisfare i requisiti funzionali definiti nella fase di analisi. In particolare, il sistema consente di generare report in diversi formati (\emph{\gls{pdfg}}, DOC, XLSX, \emph{\gls{htmlg}}) a partire da dati strutturati, garantendo flessibilità e indipendenza da piattaforme server esterne.\\
 Dal punto di vista prestazionale, i test condotti hanno evidenziato come il comportamento del sistema sia complessivamente comparabile a quello di JasperServer, soprattutto nelle esecuzioni successive alla prima. In entrambi i casi, infatti, il tempo di inizializzazione rappresenta un fattore significativo, mentre le esecuzioni successive risultano più efficienti grazie alla riduzione dell'overhead iniziale.\\
 Un ulteriore risultato rilevante riguarda la modularità del sistema sviluppato: la separazione tra logica di generazione, configurazione e interfaccia consente una maggiore flessibilità e facilita eventuali estensioni future. Questo aspetto rappresenta un valore aggiunto rispetto a soluzioni più monolitiche.
 
 \section{Limiti del lavoro}
-
 Nonostante i risultati positivi, il lavoro presenta alcuni limiti che è importante evidenziare.
 In primo luogo, i test prestazionali sono stati condotti in un ambiente controllato e non rappresentano pienamente scenari di produzione reale. In particolare, non sono stati eseguiti test sotto carico concorrente, che potrebbero evidenziare criticità legate alla gestione delle risorse e alla scalabilità del sistema.\\
 In secondo luogo, il numero di scenari testati è limitato e non copre tutte le possibili casistiche applicative. Ad esempio, non sono stati considerati dataset di dimensioni molto elevate o configurazioni distribuite.\\
 Un ulteriore limite riguarda la gestione delle risorse del motore BIRT: l'inizializzazione e la chiusura del motore ad ogni esecuzione, seppur corretta dal punto di vista della stabilità, potrebbe risultare inefficiente in contesti ad alta frequenza di utilizzo.\\
-Infine, l'interfaccia utente sviluppata nel PoC ha uno scopo puramente dimostrativo e non è stata progettata per un utilizzo in ambienti produttivi.
+Infine, l'interfaccia utente sviluppata nel \emph{\gls{PoCg}} ha uno scopo puramente dimostrativo e non è stata progettata per un utilizzo in ambienti produttivi.
 
 \section{Sviluppi futuri}
-
 Alla luce dei risultati ottenuti, è possibile individuare diverse direzioni per sviluppi futuri del sistema.\\
 Un primo possibile miglioramento consiste nell'ottimizzazione delle prestazioni, ad esempio attraverso l'introduzione di meccanismi di caching o la gestione persistente del motore BIRT, evitando la sua inizializzazione ad ogni esecuzione.\\
 Un secondo sviluppo riguarda l'evoluzione dell'architettura verso un modello a servizi, ad esempio tramite la realizzazione di un'API REST che consenta di integrare il sistema in applicazioni web o microservizi.\\
@@ -39,7 +36,7 @@ Di seguito si riporta la verifica dei requisiti individuati durante l'analisi de
 
 \subsection{Requisiti funzionali}
 \begin{table}[H]%
-            \caption{Tabella del tracciamento dei requisti funzionali}
+            \caption{Tabella del tracciamento dei requisiti funzionali}
             \label{tab:requisiti-funzionali-conclusioni}
             \begin{tabularx}{\textwidth}{|lXll|}
             \hline\hline
@@ -48,15 +45,15 @@ Di seguito si riporta la verifica dei requisiti individuati durante l'analisi de
             \hline
             RFO1    & Il sistema deve fornire un editor grafico per consentire la creazione e la progettazione visuale dei report & Obbligatorio & Soddisfatto\\
             \hline
-            RFO2    & Il sistema deve permettere l'integrazione con servizi e applicazioni che espongono dati tramite \emph{\gls{apig}} in formato \emph{JSON} & Obbligatorio & Soddisfatto\\
+            RFO2    & Il sistema deve permettere l'integrazione con servizi e applicazioni che espongono dati tramite \emph{\gls{apig}} in formato \emph{\gls{JSONg}} & Obbligatorio & Soddisfatto\\
             \hline
             RFO3    & Il sistema deve poter gestire report complessi e strutturati in modo modulare, in particolare elementi di sottoreport & Obbligatorio & Soddisfatto\\
             \hline
-            RFO4    & Il sistema deve consentire l'esportazione dei report in molteplici formati (PDF, DOC, XLSX) & Obbligatorio & Soddisfatto\\
+            RFO4    & Il sistema deve consentire l'esportazione dei report in molteplici formati (\emph{\gls{pdfg}}, DOC, XLSX) & Obbligatorio & Soddisfatto\\
             \hline
             RFO5    & Il sistema deve consentire l'invocazione programmatica dei report da applicazioni esterne tramite \emph{\gls{apig}} & Obbligatorio & Soddisfatto\\
             \hline
-            RFO6    & Il sistema deve garantire supporto a database \emph{SQL} e \emph{NoSQL} & Obbligatorio & Soddisfatto\\
+            RFO6    & Il sistema deve garantire supporto a database \emph{\gls{sqlg}} e \emph{NoSQL} & Obbligatorio & Soddisfatto\\
             \hline
             RFO7    & Il sistema deve fornire la possibilità di personalizzazione e \emph{scripting} dei report & Obbligatorio & Soddisfatto\\
             \hline
@@ -76,7 +73,7 @@ Di seguito si riporta la verifica dei requisiti individuati durante l'analisi de
             \hline
             RNFO2    & Il sistema deve garantire la corretta generazione dei report in modo consistente & Obbligatorio & Soddisfatto\\
             \hline
-            RNFO3    & Il sistema deve consentire una facile integrazione con applicazioni esistenti sviluppate in \emph{Java}, \emph{.NET} e \emph{Python} & Obbligatorio & Soddisfatto\\
+            RNFO3    & Il sistema deve consentire una facile integrazione con applicazioni esistenti sviluppate in \emph{\gls{Javag}}, \emph{.NET} e \emph{\gls{pythong}} & Obbligatorio & Soddisfatto\\
             \hline
             RNFO4    & Il sistema deve garantire tempi di risposta accettabili anche su dataset consistenti & Obbligatorio & Soddisfatto\\
             \hline
@@ -147,7 +144,6 @@ Di seguito si riporta la verifica dei requisiti individuati durante l'analisi de
 Dalla tabella illustrata si può notare che tutti i requisiti identificati durante l'analisi sono stati soddisfatti, con un totale di 19 requisiti raggiunti. In particolare, sono stati soddisfatti tutti i requisiti funzionali,non funzionali, qualitativi e di vincolo. Questo risultato conferma il successo del progetto nel raggiungere gli obiettivi prefissati e nel fornire una soluzione efficace per la generazione di report basata su BIRT.
 
 \section{Considerazioni finali}
-
 In conclusione, il lavoro svolto ha dimostrato la fattibilità della realizzazione di un sistema di reportistica basato su BIRT completamente personalizzato e indipendente da piattaforme server esterne.\\
 Il Proof of Concept sviluppato rappresenta una valida alternativa a soluzioni consolidate, almeno per quanto riguarda scenari di utilizzo standard, offrendo al contempo maggiore flessibilità e controllo sull'intero processo di generazione dei report.\\
 L'esperienza maturata durante lo sviluppo ha inoltre permesso di approfondire tematiche rilevanti nell'ambito dell'ingegneria del software, quali la progettazione architetturale, l'integrazione tra componenti e l'analisi delle prestazioni.\\
