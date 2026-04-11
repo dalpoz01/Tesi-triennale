@@ -123,14 +123,14 @@
 \label{sec:strumenti-utilizzati}
 Per lo studio dei vari programmi di reportistica sono stati utilizzati i seguenti strumenti:
 \begin{itemize}
-    \item \emph{\textbf{Docker e Docker Compose}}: \footcite{site:docker}una piattaforma di containerizzazione che consente di creare, distribuire e eseguire applicazioni in ambienti isolati chiamati container. Docker semplifica la gestione delle dipendenze e garantisce la coerenza tra gli ambienti di sviluppo, test e produzione. Docker Compose è uno strumento che consente di definire e gestire applicazioni multi-container utilizzando un file di configurazione \texttt{docker-compose.yml}.
-        In particolare, Docker è stato utilizzato per creare un ambiente di sviluppo isolato per le diverse applicazioni, consentendo di eseguire le applicazioni in un container separato dal sistema operativo host. Docker Compose è stato utilizzato per definire e gestire i servizi necessari per l'esecuzione degli applicativi, come il database e il server applicativo, dove possibile.
+    \item \emph{\textbf{Docker e Docker Compose}}: \footcite{site:docker}una piattaforma di containerizzazione che consente di creare, distribuire e eseguire applicazioni in ambienti isolati chiamati container. \emph{Docker} semplifica la gestione delle dipendenze e garantisce la coerenza tra gli ambienti di sviluppo, test e produzione. Docker Compose è uno strumento che consente di definire e gestire applicazioni multi-container utilizzando un file di configurazione \texttt{docker-compose.yml}.
+        In particolare, Docker è stato utilizzato per creare un ambiente di sviluppo isolato per le diverse applicazioni, consentendo di eseguire le applicazioni in un container separato dal sistema operativo host. \emph{Docker Compose} è stato utilizzato per definire e gestire i servizi necessari per l'esecuzione degli applicativi, come il database e il server applicativo, dove possibile.
         \begin{figure}[H] 
             \centering 
             \includegraphics[width=0.4\columnwidth]{strumenti/docker-logo.png} 
             \caption{Logo di Docker}
         \end{figure}
-    \item \emph{\textbf{Postman}}: \footcite{site:postman}uno strumento utilizzato per testare le \emph{API RESTful}. Consente di inviare richieste \emph{\gls{htmlg}\glsfirstoccur} e visualizzare le risposte, facilitando il processo di sviluppo e debug delle \emph{\gls{apig}}. E' stato utilizzato per creare un server mock sul quale eseguire test sulle \emph{\gls{apig}} messe a disposizione dai vari software di reportistica e simulare passaggi di dati in formato \emph{\gls{JSONg}}.
+    \item \emph{\textbf{Postman}}: \footcite{site:postman}uno strumento utilizzato per testare le \emph{API RESTful}. Consente di inviare richieste \emph{\gls{htmlg}\glsfirstoccur} e visualizzare le risposte, facilitando il processo di sviluppo e debug delle \emph{\gls{apig}}. È stato utilizzato per creare un server mock sul quale eseguire test sulle \emph{\gls{apig}} messe a disposizione dai vari software di reportistica e simulare passaggi di dati in formato \emph{\gls{JSONg}}.
         \begin{figure}[H] 
             \centering 
             \includegraphics[width=0.4\columnwidth]{strumenti/postman-logo.png}
@@ -196,7 +196,7 @@ Per lo studio dei vari programmi di reportistica sono stati utilizzati i seguent
         Stimulsoft Designer + Server &
         Commerciale &
         Piattaforma quasi completa; editor grafico avanzato; supporto \emph{\gls{JSONg}} e sottoreport &
-        \emph{\gls{apig}} non native; installazione server limitata (Windows / Docker) \\
+        \emph{\gls{apig}} non native; installazione server limitata (\emph{Windows} / \emph{Docker}) \\
     \hline
         SAP Crystal Report &
         Commerciale &
@@ -224,7 +224,7 @@ Per lo studio dei vari programmi di reportistica sono stati utilizzati i seguent
     Per realizzare questo si è proceduto in questo modo:
     \begin{itemize}
         \item Definire un data source di tipo Scripted Data Source;
-        \item Aggiungere un parametro, che chiameremo json, in Report Parameters;
+        \item Aggiungere un parametro, che chiameremo \texttt{json}, in Report Parameters;
         \item Creare un dataset collegandolo al datasource precedentemente definito;
         \item Sul dataset appena creato, nel file di design seleziono \texttt{Script} e successivamente in alto seleziono \texttt{open} dove aggiungo il seguente codice:
 
@@ -255,8 +255,8 @@ Per lo studio dei vari programmi di reportistica sono stati utilizzati i seguent
     \subsection{Knowage Studio}
     \label{sec:knowage-studio}
     Knowage Studio è un ambiente di sviluppo integrato (\emph{\gls{IDEg}\glsfirstoccur}) per la creazione e la gestione di report e dashboard all'interno della piattaforma Knowage. È progettato per semplificare il processo di sviluppo, consentendo agli utenti di creare report complessi e dashboard interattivi in modo intuitivo.\\
-    E' basato su Eclipse e offre un'interfaccia grafica che consente agli sviluppatori di progettare report utilizzando un editor drag-and-drop, senza la necessità di scrivere codice complesso. Knowage Studio supporta l'integrazione con diverse fonti di dati, inclusi database relazionali, file di testo e servizi web, consentendo agli utenti di accedere facilmente ai dati necessari per i loro report.
-    E' stato utilizzato da Knowage fino alla versione 6.2, poi definitivamente abbandonato a favore di BIRT.\\
+    È basato su Eclipse e offre un'interfaccia grafica che consente agli sviluppatori di progettare report utilizzando un editor drag-and-drop, senza la necessità di scrivere codice complesso. Knowage Studio supporta l'integrazione con diverse fonti di dati, inclusi database relazionali, file di testo e servizi web, consentendo agli utenti di accedere facilmente ai dati necessari per i loro report.
+    È stato utilizzato da Knowage fino alla versione 6.2, poi definitivamente abbandonato a favore di BIRT.\\
     Si è voluto analizzare questo prodotto in quanto poteva dimostrare l apossibilità di deploy di report in knowage tramite un editor grafico. Esso infatti funziona tramite l'aggiunta di un plugin a Eclipse che permette di caricare i report in modo simile a quanto fa JasperStudio per JasperServer.\\
     L'analisi ha evidenziato che questo prodotto non è più supportato da Knowageper cui non è stato possibile testare questa funzionalità.
 
@@ -273,7 +273,7 @@ Per lo studio dei vari programmi di reportistica sono stati utilizzati i seguent
     Stimulsoft è stato considerato in combinazione tra Stimulsoft Designer e Stimulsoft Server per poter replicare le funzionalità di JasperServer, in quanto offre un editor grafico avanzato per la creazione dei report e un server per la gestione e l'esecuzione degli stessi.\\
     L'ambiente di lavoro si presenta in forma di un'applicazione desktop con grafica che ricorda molto quella di office, che quindi facilità l'utilizzo da parte di utenti non esperti.\\
     Questo, pur essendo un grande punto di forza, rappresenta anche un limite in quanto il prodotto è disponibile solo per ambiente Windows e non è possibile eseguirlo su server Linux, che è l'ambiente di lavoro più comune per questo tipo di applicazioni.\\
-    Una modalità alternativa di esecuzione considerata è quella tramite Docker, ma in questo caso non si è riusciti pienamente ad eseguire il prodotto in quanto l'immagine \emph{\gls{dockerg}} ufficiale disponibile non  si eseguiva correttamente e quindi limitando la possibilità di testare le funzionalità offerte.\\
+    Una modalità alternativa di esecuzione considerata è quella tramite \emph{Docker}, ma in questo caso non si è riusciti pienamente ad eseguire il prodotto in quanto l'immagine \emph{\gls{dockerg}} ufficiale disponibile non  si eseguiva correttamente e quindi limitando la possibilità di testare le funzionalità offerte.\\
 
 \section{Conclusioni}
 \label{sec:conclusioni}

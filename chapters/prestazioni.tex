@@ -4,7 +4,7 @@
 
 %\intro{Questo capitolo descrive le prestazioni ottenute durante i test effettuati sul prototipo di reportistica sviluppato rispetto a JasperServer.}
 
-\intro{Il presente capitolo ha l'obiettivo di analizzare e confrontare le prestazioni del sistema sviluppato nel \emph{\gls{PoCg}} rispetto alla soluzione di riferimento, rappresentata da JasperServer. L'analisi prestazionale riveste un ruolo fondamentale nel processo di valutazione, in quanto consente di verificare non solo la correttezza funzionale delle soluzioni, ma anche la loro efficienza e scalabilità in scenari di utilizzo realistici. A differenza dei test funzionali, che si limitano a verificare la presenza delle caratteristiche richieste, i test prestazionali permettono di valutare il comportamento del sistema in termini di tempi di risposta, gestione delle risorse e capacità di adattarsi a volumi crescenti di dati.}
+\intro{Il presente capitolo ha l'obiettivo di analizzare e confrontare le prestazioni del sistema sviluppato nel PoC rispetto alla soluzione di riferimento, rappresentata da JasperServer. L'analisi prestazionale riveste un ruolo fondamentale nel processo di valutazione, in quanto consente di verificare non solo la correttezza funzionale delle soluzioni, ma anche la loro efficienza e scalabilità in scenari di utilizzo realistici. A differenza dei test funzionali, che si limitano a verificare la presenza delle caratteristiche richieste, i test prestazionali permettono di valutare il comportamento del sistema in termini di tempi di risposta, gestione delle risorse e capacità di adattarsi a volumi crescenti di dati.}
 
 \section{Obiettivi dei test prestazionali}
 I test condotti hanno lo scopo di fornire una valutazione preliminare delle prestazioni delle soluzioni analizzate, con particolare riferimento ai seguenti aspetti:
@@ -22,7 +22,7 @@ Per garantire la comparabilità dei risultati, è stato definito un approccio me
 In primo luogo, si è cercato di mantenere condizioni di esecuzione il più possibile simili, pur tenendo conto delle differenze architetturali tra i sistemi. In particolare:
 \begin{itemize}
     \item il \emph{\gls{PoCg}} è stato eseguito come applicazione locale;
-    \item JasperServer è stato eseguito all'interno di un container Docker;
+    \item JasperServer è stato eseguito all'interno di un container \emph{Docker};
     \item entrambi i sistemi hanno utilizzato gli stessi file di report e le stesse sorgenti dati in formato \emph{\gls{JSONg}}.
 \end{itemize}
 La scelta di utilizzare dati \emph{\gls{JSONg}} come input è coerente con i requisiti definiti nella fase di analisi, in quanto rappresentano una modalità comune di scambio dati tra servizi applicativi.
@@ -61,7 +61,7 @@ Questa varietà di scenari consente di osservare il comportamento del sistema al
             \item il \emph{\gls{PoCg}} mostra un comportamento simile nelle esecuzioni successive, ma con un tempo iniziale leggermente inferiore.
         \end{itemize}
         Questo comportamento è coerente con la presenza di meccanismi di caching e inizializzazione nei sistemi server-based.\\
-        Di seguito è riportata una grafica per Jasper server (fig. \ref{fig:scenario1}) e una grafica del \emph{\gls{PoCg}} (fig. \ref{fig:scenario1_PoCg}) che confronta i tempi di generazione dei report per entrambe le soluzioni nel primo scenario:
+        Di seguito è riportata una grafica per Jasper server (fig. \ref{fig:scenario1}) e una grafica del \emph{\gls{PoCg}} (fig. \ref{fig:scenario1_PoC}) che confronta i tempi di generazione dei report per entrambe le soluzioni nel primo scenario:
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.8\textwidth]{prestazioni/JasperServer_tempi.png}

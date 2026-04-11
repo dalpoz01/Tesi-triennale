@@ -1,7 +1,7 @@
 \chapter{Progettazione e realizzazione del Proof of Concept}
 \label{cap:progettazione-codifica}
 
-\intro{Questo capitolo descrive lo sviluppo del Proof of Concept (\emph{\gls{PoCg}}) di reportistica che è stato realizzato durante lo stage analizzandone architettura, tecnologie e funzionalità.}\\
+\intro{Questo capitolo descrive lo sviluppo del Proof of Concept (PoC) di reportistica che è stato realizzato durante lo stage analizzandone architettura, tecnologie e funzionalità.}\\
 
 \section{Obiettivi del PoC}
 A seguito delle analisi e dei confronti effettuati si è scelto di procedere alla realizzazione di un \emph{\gls{PoCg}} in linguaggio \texttt{Java} per un applicativo locale e in linguaggio \texttt{Python} per una versione server utilizzando la soluzione open-source Birt Design Report e le sue librerie Birtruntime che permettono di sviluppare un applicativo in grado di compilare report Birt anche in assenza del programma di design.\\
@@ -15,10 +15,10 @@ In questa sezione vengono analizzate le principali tecnologie utilizzate nello s
     \subsection{Birt Design Report}
     \label{subsec:birt-design-report}
     Una piattaforma open-source per la creazione di report, che offre un ambiente di sviluppo integrato e una vasta gamma di funzionalità per la progettazione e la generazione di report.\\
-    E' la base su cui si è deciso di costruire il sistema di reportistica, grazie alla sua flessibilità e alla possibilità di integrare dati da diverse fonti, inclusi servizi \emph{\gls{restg}} che restituiscono dati in formato \emph{\gls{JSONg}}, e per il fatto di essere la base di studio del progetto.\\
+    È la base su cui si è deciso di costruire il sistema di reportistica, grazie alla sua flessibilità e alla possibilità di integrare dati da diverse fonti, inclusi servizi \emph{\gls{restg}} che restituiscono dati in formato \emph{\gls{JSONg}}, e per il fatto di essere la base di studio del progetto.\\
     \subsection{Birtruntime}
     \label{subsec:birtruntime}
-    E' una libreria Java che consente di eseguire i report progettati con Birt Design Report in ambienti privi dell'\emph{\gls{IDEg}}, permettendo così l'integrazione con applicazioni esterne.\\
+    È una libreria Java che consente di eseguire i report progettati con Birt Design Report in ambienti privi dell'\emph{\gls{IDEg}}, permettendo così l'integrazione con applicazioni esterne.\\
     La scelta di Birtruntime è stata motivata dalla necessità di disporre di uno strumento che consentisse di eseguire i report in modo autonomo, senza dover dipendere dall'ambiente di sviluppo.\\
     Constituisce, assieme a birt design report, la base su cui è stato costruito il sistema di reportistica, permettendo di eseguire i report progettati con Birt Design Report in ambienti privi dell'\emph{\gls{IDEg}}, consentendo così l'integrazione con applicazioni esterne.
     
@@ -96,7 +96,7 @@ Per questo motivo, ogni ciclo di generazione del report prevede:
     \item rilascio esplicito delle risorse.
 \end{itemize}
 Questo approccio garantisce stabilità anche in scenari con esecuzioni ripetute.\\
-Come si può notare, è stato adottato un tipo di architettura MVC che consente di separare chiaramente le responsabilità tra la logica di business, la presentazione e il controllo dell'applicazione.\\
+Come si può notare, è stato adottato un tipo di architettura \emph{\gls{MVCg}\glsfirstoccur} che consente di separare chiaramente le responsabilità tra la logica di business, la presentazione e il controllo dell'applicazione.\\
 Graficamente l'architettura del programma \emph{\gls{Javag}} e il suo funzionamento sono rappresentati nella figura \ref{fig:architettura-java}.
 \begin{figure}[H]
     \centering
@@ -145,34 +145,35 @@ Il metodo restituisce un valore booleano:
 Ogni metodo di generazione segue una sequenza di operazioni ben definita, articolata nelle seguenti fasi:
 
 \begin{itemize}
-    \item {Configurazione del motore BIRT}
+    \item {\textbf{Configurazione del motore BIRT}}\\
     La prima fase consiste nella configurazione del motore di esecuzione BIRT attraverso un oggetto \texttt{EngineConfig}. In questa fase vengono definiti il percorso della directory di lavoro e la configurazione del logging.\\
     Successivamente viene avviata la piattaforma BIRT tramite il metodo \texttt{Platform.startup()}, che inizializza tutte le componenti necessarie all'esecuzione dei report.
-    \item {Creazione del report engine}
+    \item {\textbf{Creazione del report engine}}\\
     Una volta configurato l'ambiente, viene creato il motore di esecuzione tramite una factory (\texttt{IReportEngineFactory}). Il motore (\texttt{IReportEngine}) rappresenta il componente principale che consente di aprire i file di design e creare task di esecuzione.
-    \item {Caricamento del report design}
+    \item {\textbf{Caricamento del report design}}\\
     Il file di design viene caricato tramite il metodo \texttt{openReportDesign()}, che restituisce un oggetto \texttt{IReportRunnable}. Questo oggetto rappresenta il report in forma eseguibile.
     Successivamente viene creato un task di tipo \texttt{IRunAndRenderTask}, che consente di eseguire e renderizzare il report in un'unica operazione.
-    \item{Gestione dei parametri \emph{\gls{JSONg}}}
+    \item{\textbf{Gestione dei parametri \emph{JSON}}}\\
     Una fase fondamentale riguarda la gestione dei parametri di input, in particolare dei dati \emph{\gls{JSONg}}.
     La logica implementata distingue due casi:
     \begin{itemize}
-        \item se la sorgente è un URL, il parametro \emph{\gls{JSONg}} viene passato direttamente al report;
+        \item se la sorgente è un URL, il parametro \texttt{json} viene passato direttamente al report;
         \item se la sorgente è un file locale, il contenuto viene letto e convertito in stringa, quindi assegnato ai parametri del report.
     \end{itemize}
     Questo approccio consente di supportare sia dati statici che dinamici.
-    \item{Configurazione delle opzioni di rendering}
+    \item{\textbf{Configurazione delle opzioni di rendering}}\\
+     In questa fase viene configurato l'oggetto \texttt{RenderOption} in base al formato di output richiesto.\\
     In base al formato richiesto vengono impostate specifiche opzioni di rendering:
     \begin{itemize}
         \item \texttt{PDFRenderOption} per \emph{\gls{pdfg}};
         \item \texttt{RenderOption} per documenti generici;
         \item \texttt{EXCELRenderOption} per file Excel;
-        \item \texttt{HTMLRenderOption} per HTML.
+        \item \texttt{HTMLRenderOption} per \emph{\gls{htmlg}}.
     \end{itemize}
     In questa fase viene inoltre definito il nome del file di output, spesso arricchito con un timestamp per evitare sovrascritture.
-    \item{Esecuzione del report}
+    \item{\textbf{Esecuzione del report}}\\
     Il task viene eseguito tramite il metodo \texttt{run()}, che avvia il processo di generazione del documento. Durante questa fase il motore BIRT elabora i dati e produce il file finale.
-    \item{Rilascio delle risorse}
+    \item{\textbf{Rilascio delle risorse}}\\
     Al termine dell'esecuzione, vengono rilasciate le risorse utilizzate:
     \begin{itemize}
         \item chiusura del task;
